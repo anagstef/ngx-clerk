@@ -1,0 +1,15 @@
+{
+  "name": "ngx-clerk",
+  "version": "0.0.2",
+  "peerDependencies": {
+    "@angular/common": "^17.3.0",
+    "@angular/core": "^17.3.0",
+    "@angular/router": "^17.3.0"
+  },
+  "dependencies": {
+    "@clerk/shared": "2.0.0-beta.19",
+    "@clerk/types": "4.0.0-beta.20",
+    "tslib": "2.3.0"
+  },
+  "sideEffects": false
+}

@@ -9,6 +9,11 @@
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "skipLibCheck": true,
+    "paths": {
+      "ngx-clerk": [
+        "./dist/ngx-clerk"
+      ]
+    },
     "esModuleInterop": true,
     "sourceMap": true,
     "declaration": false,
