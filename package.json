@@ -4,11 +4,10 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build && cp ./README.md ./dist/ngx-clerk/README.md",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test",
     "version:patch": "cd projects/ngx-clerk && npm version patch",
-    "publish": "ng build && cd dist/ngx-clerk && npm publish"
+    "publish": "npm run build && cd dist/ngx-clerk && npm publish"
   },
   "private": true,
   "dependencies": {
