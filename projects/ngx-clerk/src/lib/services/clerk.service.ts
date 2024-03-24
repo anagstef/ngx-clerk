@@ -41,7 +41,7 @@ export class ClerkService {
 
   public __init(options: ClerkInitOptions) {
     if (!isPlatformBrowser(this.platformId)) {
-      console.warn('ClerkService can only be used in the browser');
+      // ClerkService can only be used in the browser
       return;
     }
     if (this._initialized) {
