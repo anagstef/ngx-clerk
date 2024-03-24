@@ -16,3 +16,6 @@ export { ClerkAuthGuardService } from './lib/guards/auth-guard.service';
 
 // Utils
 export { catchAllRoute } from './lib/utils/route-utils';
+
+// Types
+export * from '@clerk/types';
