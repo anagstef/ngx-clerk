@@ -1,4 +1,5 @@
-import { Injectable, NgZone } from '@angular/core';
+import { Injectable, NgZone, Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { Router } from '@angular/router';
 import { ActiveSessionResource, Clerk, ClerkOptions, ClientResource, CreateOrganizationProps, OrganizationProfileProps, OrganizationResource, SignInProps, SignInRedirectOptions, SignUpProps, SignUpRedirectOptions, UserProfileProps, UserResource, Without } from '@clerk/types';
 import { ReplaySubject, take } from 'rxjs';
@@ -33,10 +34,13 @@ export class ClerkService {
 
   private _initialized: boolean = false;
 
-  constructor(private _router: Router, private _ngZone: NgZone) {} 
+  constructor(
+    @Inject(PLATFORM_ID) private platformId: Object,
+    private _router: Router,
+    private _ngZone: NgZone) {} 
 
   public __init(options: ClerkInitOptions) {
-    if (!window) {
+    if (!isPlatformBrowser(this.platformId)) {
       console.warn('ClerkService can only be used in the browser');
       return;
     }
