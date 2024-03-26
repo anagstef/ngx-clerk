@@ -1,15 +1,37 @@
 {
   "name": "ngx-clerk",
   "version": "0.0.6",
-  "peerDependencies": {
-    "@angular/common": "^17.3.0",
-    "@angular/core": "^17.3.0",
-    "@angular/router": "^17.3.0"
+  "description": "Unofficial Clerk.com SDK for Angular",
+  "keywords": [
+    "clerk",
+    "typescript",
+    "angular",
+    "auth",
+    "authentication",
+    "passwordless",
+    "session",
+    "jwt"
+  ],
+  "homepage": "https://github.com/anagstef/ngx-clerk",
+  "bugs": {
+    "url": "https://github.com/anagstef/ngx-clerk/issues"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anagstef/ngx-clerk.git",
+    "directory": "projects/ngx-clerk"
+  },
+  "license": "MIT",
+  "author": "https://github.com/anagstef",
   "dependencies": {
     "@clerk/shared": "2.0.0-beta.19",
     "@clerk/types": "4.0.0-beta.20",
     "tslib": "2.3.0"
+  },
+  "peerDependencies": {
+    "@angular/common": "^17.3.0",
+    "@angular/core": "^17.3.0",
+    "@angular/router": "^17.3.0"
   },
   "sideEffects": false
 }

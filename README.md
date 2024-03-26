@@ -1,8 +1,8 @@
 # ngx-clerk
 
-### ⚠️ Disclaimer: This unofficial package is not affiliated with Clerk.com. It is an unofficial project that aims to provide a seamless integration of Clerk features into Angular applications.
+Welcome to **ngx-clerk**, an unofficial Angular package that integrates with [Clerk](https://clerk.com/).
 
-Welcome to **ngx-clerk**, an unofficial Angular package that interfaces with [Clerk](https://clerk.com/).
+### ⚠️ Disclaimer: This unofficial package is not affiliated with Clerk.com. It is an unofficial project that aims to provide a seamless integration of Clerk features into Angular applications.
 
 ## Prerequisites
 
