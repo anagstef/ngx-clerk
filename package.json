@@ -6,6 +6,7 @@
     "start": "ng serve",
     "build": "ng build && cp ./README.md ./dist/ngx-clerk/README.md",
     "watch": "ng build --watch --configuration development",
+    "version:minor": "cd projects/ngx-clerk && npm version minor",
     "version:patch": "cd projects/ngx-clerk && npm version patch",
     "publish": "npm run build && cd dist/ngx-clerk && npm publish"
   },
