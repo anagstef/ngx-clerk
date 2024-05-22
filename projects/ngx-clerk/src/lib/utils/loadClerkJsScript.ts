@@ -22,7 +22,7 @@ export const loadClerkJsScript = (opts: ClerkInitOptions) => {
 };
 
 const clerkJsScriptUrl = (opts: ClerkInitOptions) => {
-  const { clerkJSUrl, clerkJSVariant, clerkJSVersion = 'beta', publishableKey } = opts;
+  const { clerkJSUrl, clerkJSVariant, clerkJSVersion = '5', publishableKey } = opts;
 
   if (clerkJSUrl) {
     return clerkJSUrl;

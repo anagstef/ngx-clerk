@@ -24,8 +24,8 @@
   "license": "MIT",
   "author": "https://github.com/anagstef",
   "dependencies": {
-    "@clerk/shared": "2.0.0-beta.19",
-    "@clerk/types": "4.0.0-beta.20",
+    "@clerk/shared": "2.2.0",
+    "@clerk/types": "4.5.0",
     "tslib": "2.3.0"
   },
   "peerDependencies": {
