@@ -17,7 +17,7 @@ import type {
   UserResource,
   Without,
 } from '@clerk/shared/types';
-import { loadClerkJSScript } from '../utils/loadClerkJsScript';
+import { loadClerkScripts } from '../utils/loadClerkJsScript';
 import type { ClerkInitOptions } from '../utils/types';
 
 interface HeadlessBrowserClerk extends Clerk {
@@ -79,7 +79,9 @@ export class ClerkService {
     }
     this._initialized = true;
 
-    return loadClerkJSScript(options).then(async () => {
+    const { clerkPromise, clerkUICtorPromise } = loadClerkScripts(options);
+
+    return clerkPromise.then(async () => {
       const { publishableKey, __internal_clerkJSUrl, __internal_clerkJSVersion, sdkMetadata, ...loadOptions } = options;
       await window.Clerk.load({
         routerPush: (to: string) =>
@@ -95,7 +97,8 @@ export class ClerkService {
             return this._router.navigate([url.pathname], { queryParams, replaceUrl: true });
           }),
         ...loadOptions,
-      });
+        ui: { ClerkUI: clerkUICtorPromise },
+      } as any);
 
       this._ngZone.run(() => {
         this._client.set(window.Clerk.client ?? null);
