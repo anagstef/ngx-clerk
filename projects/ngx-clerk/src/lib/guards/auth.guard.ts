@@ -6,7 +6,7 @@ import { ClerkService } from '../services/clerk.service';
 
 function checkAuth(clerk: ClerkService, state: RouterStateSnapshot): boolean {
   if (!clerk.isSignedIn()) {
-    clerk.redirectToSignIn({ fallbackRedirectUrl: state.url });
+    clerk.redirectToSignIn({ signInFallbackRedirectUrl: state.url });
     return false;
   }
   return true;
