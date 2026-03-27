@@ -12,7 +12,7 @@ export { ClerkOrganizationListComponent } from './lib/components/organization-li
 export { ClerkService } from './lib/services/clerk.service';
 
 // Clerk Guards
-export { ClerkAuthGuardService } from './lib/guards/auth-guard.service';
+export { canActivateClerk } from './lib/guards/auth.guard';
 
 // Utils
 export { catchAllRoute } from './lib/utils/route-utils';
