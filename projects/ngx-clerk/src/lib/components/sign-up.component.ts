@@ -5,6 +5,7 @@ import {
   effect,
   ElementRef,
   inject,
+  Injector,
   Input,
   OnDestroy,
   ViewChild,
@@ -26,6 +27,7 @@ export class ClerkSignUpComponent implements AfterViewInit, OnDestroy {
   @Input() props: SignUpProps | undefined;
 
   private _clerk = inject(ClerkService);
+  private _injector = inject(Injector);
   private _mounted = false;
 
   ngAfterViewInit() {
@@ -41,7 +43,7 @@ export class ClerkSignUpComponent implements AfterViewInit, OnDestroy {
           this._mounted = true;
           mountEffect.destroy();
         }
-      });
+      }, { injector: this._injector });
     }
   }
 

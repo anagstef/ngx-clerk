@@ -46,18 +46,24 @@ export class ClerkService {
 
   private _initialized = false;
 
-  // Core state signals
-  readonly clerk = signal<HeadlessBrowserClerk | BrowserClerk | null>(null);
-  readonly client = signal<ClientResource | null>(null);
-  readonly session = signal<ActiveSessionResource | null>(null);
-  readonly user = signal<UserResource | null>(null);
-  readonly organization = signal<OrganizationResource | null>(null);
+  // Core state signals (private writable, public readonly)
+  private readonly _clerk = signal<HeadlessBrowserClerk | BrowserClerk | null>(null);
+  private readonly _client = signal<ClientResource | null>(null);
+  private readonly _session = signal<ActiveSessionResource | null>(null);
+  private readonly _user = signal<UserResource | null>(null);
+  private readonly _organization = signal<OrganizationResource | null>(null);
+
+  readonly clerk = this._clerk.asReadonly();
+  readonly client = this._client.asReadonly();
+  readonly session = this._session.asReadonly();
+  readonly user = this._user.asReadonly();
+  readonly organization = this._organization.asReadonly();
 
   // Derived signals
-  readonly isLoaded = computed(() => this.clerk() !== null);
-  readonly isSignedIn = computed(() => !!this.user()?.id);
-  readonly userId = computed(() => this.user()?.id ?? null);
-  readonly orgId = computed(() => this.organization()?.id ?? null);
+  readonly isLoaded = computed(() => this._clerk() !== null);
+  readonly isSignedIn = computed(() => !!this._user()?.id);
+  readonly userId = computed(() => this._user()?.id ?? null);
+  readonly orgId = computed(() => this._organization()?.id ?? null);
 
   /**
    * Initialize ClerkJS. Called internally by provideClerk() via APP_INITIALIZER.
@@ -92,20 +98,20 @@ export class ClerkService {
       });
 
       this._ngZone.run(() => {
-        this.client.set(window.Clerk.client ?? null);
-        this.session.set((window.Clerk.session as ActiveSessionResource) ?? null);
-        this.user.set(window.Clerk.user ?? null);
-        this.organization.set(window.Clerk.organization ?? null);
-        this.clerk.set(window.Clerk);
+        this._client.set(window.Clerk.client ?? null);
+        this._session.set((window.Clerk.session as ActiveSessionResource) ?? null);
+        this._user.set(window.Clerk.user ?? null);
+        this._organization.set(window.Clerk.organization ?? null);
+        this._clerk.set(window.Clerk);
       });
 
       window.Clerk.addListener((resources) => {
         this._ngZone.run(() => {
-          this.client.set(resources.client ?? null);
-          this.session.set((resources.session as ActiveSessionResource) ?? null);
-          this.user.set(resources.user ?? null);
-          this.organization.set(resources.organization ?? null);
-          this.clerk.set(window.Clerk);
+          this._client.set(resources.client ?? null);
+          this._session.set((resources.session as ActiveSessionResource) ?? null);
+          this._user.set(resources.user ?? null);
+          this._organization.set(resources.organization ?? null);
+          this._clerk.set(window.Clerk);
         });
       });
     });
