@@ -1,6 +1,6 @@
 {
   "name": "ngx-clerk",
-  "version": "0.2.0",
+  "version": "1.0.0",
   "description": "Unofficial Clerk.com SDK for Angular",
   "keywords": [
     "clerk",
@@ -24,14 +24,13 @@
   "license": "MIT",
   "author": "https://github.com/anagstef",
   "dependencies": {
-    "@clerk/shared": "2.2.0",
-    "@clerk/types": "4.5.0",
-    "tslib": "2.3.0"
+    "@clerk/shared": "^4.0.0",
+    "tslib": "^2.3.0"
   },
   "peerDependencies": {
-    "@angular/common": "^17.3.0",
-    "@angular/core": "^17.3.0",
-    "@angular/router": "^17.3.0"
+    "@angular/common": "^19.0.0",
+    "@angular/core": "^19.0.0",
+    "@angular/router": "^19.0.0"
   },
   "sideEffects": false
 }
