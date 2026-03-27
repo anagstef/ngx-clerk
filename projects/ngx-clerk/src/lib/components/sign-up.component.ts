@@ -1,7 +1,17 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, Input, OnDestroy, ViewChild, ViewEncapsulation } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+  effect,
+  ElementRef,
+  inject,
+  Input,
+  OnDestroy,
+  ViewChild,
+  ViewEncapsulation,
+} from '@angular/core';
+import type { SignUpProps } from '@clerk/shared/types';
 import { ClerkService } from '../services/clerk.service';
-import { take } from 'rxjs';
-import { SignUpProps } from '@clerk/types';
 
 @Component({
   selector: 'clerk-sign-up',
@@ -9,23 +19,36 @@ import { SignUpProps } from '@clerk/types';
   imports: [],
   template: `<div #ref></div>`,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
 })
 export class ClerkSignUpComponent implements AfterViewInit, OnDestroy {
-  @ViewChild('ref') ref: ElementRef | null = null; 
+  @ViewChild('ref') ref: ElementRef | null = null;
   @Input() props: SignUpProps | undefined;
 
-  constructor(private _clerk: ClerkService) {}
+  private _clerk = inject(ClerkService);
+  private _mounted = false;
 
   ngAfterViewInit() {
-    this._clerk.clerk$.pipe(take(1)).subscribe((clerk) => {
-      clerk.mountSignUp(this.ref?.nativeElement, this.props);
-    });
+    const clerkInstance = this._clerk.clerk();
+    if (clerkInstance && this.ref) {
+      clerkInstance.mountSignUp(this.ref.nativeElement, this.props);
+      this._mounted = true;
+    } else {
+      const mountEffect = effect(() => {
+        const c = this._clerk.clerk();
+        if (c && this.ref && !this._mounted) {
+          c.mountSignUp(this.ref.nativeElement, this.props);
+          this._mounted = true;
+          mountEffect.destroy();
+        }
+      });
+    }
   }
 
   ngOnDestroy() {
-    this._clerk.clerk$.pipe(take(1)).subscribe((clerk) => {
-      clerk.unmountSignUp(this.ref?.nativeElement);
-    });
+    const clerkInstance = this._clerk.clerk();
+    if (clerkInstance && this.ref && this._mounted) {
+      clerkInstance.unmountSignUp(this.ref.nativeElement);
+    }
   }
 }
