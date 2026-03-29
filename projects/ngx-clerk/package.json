@@ -34,6 +34,7 @@
     "@angular/router": "^17.3.0"
   },
   "sideEffects": false,
+  "provenance": true,
   "publishConfig": {
     "access": "public"
   }
