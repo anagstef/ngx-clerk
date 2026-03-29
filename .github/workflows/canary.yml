@@ -1,0 +1,39 @@
+name: Publish Canary
+
+on:
+  push:
+    branches: [main]
+
+concurrency:
+  group: canary-publish
+  cancel-in-progress: true
+
+jobs:
+  canary:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          registry-url: https://registry.npmjs.org
+
+      - run: npm ci
+
+      - run: npm run build
+
+      - name: Set canary version
+        run: |
+          BASE_VERSION=$(node -p "require('./projects/ngx-clerk/package.json').version")
+          SHORT_SHA=$(git rev-parse --short HEAD)
+          CANARY_VERSION="${BASE_VERSION}-canary.${SHORT_SHA}"
+          echo "Publishing ${CANARY_VERSION}"
+          cd dist/ngx-clerk
+          npm version "${CANARY_VERSION}" --no-git-tag-version
+
+      - name: Publish canary
+        run: npm publish --tag canary
+        working-directory: dist/ngx-clerk
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
