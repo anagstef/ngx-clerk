@@ -6,11 +6,12 @@
     "start": "ng serve",
     "build": "ng build && cp ./README.md ./dist/ngx-clerk/README.md",
     "watch": "ng build --watch --configuration development",
-    "version:minor": "cd projects/ngx-clerk && npm version minor",
-    "version:patch": "cd projects/ngx-clerk && npm version patch",
-    "publish": "npm run build && cd dist/ngx-clerk && npm publish"
+    "version:minor": "cd projects/ngx-clerk && pnpm version minor",
+    "version:patch": "cd projects/ngx-clerk && pnpm version patch",
+    "publish": "pnpm build && cd dist/ngx-clerk && pnpm publish"
   },
   "private": true,
+  "packageManager": "pnpm@10.33.0",
   "dependencies": {
     "@angular/animations": "^21.0.0",
     "@angular/common": "^21.0.0",
@@ -20,10 +21,10 @@
     "@angular/platform-browser": "^21.0.0",
     "@angular/platform-browser-dynamic": "^21.0.0",
     "@angular/router": "^21.0.0",
+    "@clerk/shared": "^4.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
-    "zone.js": "~0.16.0",
-    "@clerk/shared": "^4.0.0"
+    "zone.js": "~0.16.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^21.0.0",
