@@ -6,9 +6,6 @@
     "start": "ng serve",
     "build": "ng build && cp ./README.md ./dist/ngx-clerk/README.md",
     "watch": "ng build --watch --configuration development",
-    "version:minor": "cd projects/ngx-clerk && pnpm version minor",
-    "version:patch": "cd projects/ngx-clerk && pnpm version patch",
-    "publish": "pnpm build && cd dist/ngx-clerk && pnpm publish",
     "lint": "ng lint",
     "release": "semantic-release"
   },
