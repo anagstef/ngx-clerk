@@ -191,6 +191,6 @@ export class ClerkService {
   // --- Sign Out ---
 
   signOut(opts?: Parameters<Clerk['signOut']>[0]) {
-    return this.clerk()?.signOut(opts);
+    return this.clerk()?.signOut(opts) ?? Promise.resolve();
   }
 }
