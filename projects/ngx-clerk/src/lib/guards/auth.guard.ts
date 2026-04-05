@@ -12,7 +12,7 @@ function checkAuth(clerk: ClerkService, state: RouterStateSnapshot): boolean {
   return true;
 }
 
-export const canActivateClerk: CanActivateFn = (route, state) => {
+export const canActivateClerk: CanActivateFn = (_route, state) => {
   const clerk = inject(ClerkService);
 
   if (clerk.isLoaded()) {
