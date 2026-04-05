@@ -194,7 +194,7 @@ After all changes:
 | `app.component.ts` | Remove `ClerkService` injection and `__init()` call |
 | `app.routes.ts` / routing config | `ClerkAuthGuardService` -> `canActivateClerk` |
 | Any component using `clerk.user$` etc. | RxJS -> signals |
-| Any template with `| async` on Clerk data | Signal reads |
+| Any template with `\| async` on Clerk data | Signal reads |
 
 ## Common mistakes
 
