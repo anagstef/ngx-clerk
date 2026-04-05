@@ -23,6 +23,15 @@
             }
           },
           "defaultConfiguration": "production"
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/ngx-clerk/**/*.ts",
+              "projects/ngx-clerk/**/*.html"
+            ]
+          }
         }
       }
     }

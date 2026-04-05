@@ -8,7 +8,8 @@
     "watch": "ng build --watch --configuration development",
     "version:minor": "cd projects/ngx-clerk && pnpm version minor",
     "version:patch": "cd projects/ngx-clerk && pnpm version patch",
-    "publish": "pnpm build && cd dist/ngx-clerk && pnpm publish"
+    "publish": "pnpm build && cd dist/ngx-clerk && pnpm publish",
+    "lint": "ng lint"
   },
   "private": true,
   "packageManager": "pnpm@10.33.0",
@@ -28,9 +29,16 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^21.0.0",
+    "@angular-eslint/eslint-plugin": "^21.3.1",
+    "@angular-eslint/eslint-plugin-template": "^21.3.1",
+    "@angular-eslint/template-parser": "^21.3.1",
     "@angular/cli": "^21.0.0",
     "@angular/compiler-cli": "^21.0.0",
-"ng-packagr": "^21.0.0",
-    "typescript": "~5.9.0"
+    "@eslint/js": "^10.0.1",
+    "angular-eslint": "^21.3.1",
+    "eslint": "^10.2.0",
+    "ng-packagr": "^21.0.0",
+    "typescript": "~5.9.0",
+    "typescript-eslint": "^8.58.0"
   }
 }
