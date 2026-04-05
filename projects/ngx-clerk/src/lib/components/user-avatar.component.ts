@@ -22,6 +22,7 @@ import { ClerkService } from '../services/clerk.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
 })
+/** Renders the Clerk User Avatar UI component. */
 export class ClerkUserAvatarComponent implements AfterViewInit, OnDestroy {
   @ViewChild('ref') ref: ElementRef | null = null;
   @Input() props: UserAvatarProps | undefined;

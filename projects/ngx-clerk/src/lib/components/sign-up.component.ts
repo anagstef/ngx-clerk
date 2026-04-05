@@ -22,6 +22,7 @@ import { ClerkService } from '../services/clerk.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
 })
+/** Renders the Clerk Sign Up UI component. */
 export class ClerkSignUpComponent implements AfterViewInit, OnDestroy {
   @ViewChild('ref') ref: ElementRef | null = null;
   @Input() props: SignUpProps | undefined;

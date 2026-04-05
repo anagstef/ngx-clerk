@@ -22,6 +22,7 @@ import { ClerkService } from '../services/clerk.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
 })
+/** Renders the Clerk Pricing Table UI component. */
 export class ClerkPricingTableComponent implements AfterViewInit, OnDestroy {
   @ViewChild('ref') ref: ElementRef | null = null;
   @Input() props: PricingTableProps | undefined;

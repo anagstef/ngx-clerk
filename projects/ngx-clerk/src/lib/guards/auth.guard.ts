@@ -12,6 +12,17 @@ function checkAuth(clerk: ClerkService, state: RouterStateSnapshot): boolean {
   return true;
 }
 
+/**
+ * Route guard that restricts access to authenticated users.
+ * Redirects unauthenticated users to the Clerk sign-in page.
+ *
+ * @example
+ * ```ts
+ * const routes: Routes = [
+ *   { path: 'dashboard', component: DashboardComponent, canActivate: [canActivateClerk] },
+ * ];
+ * ```
+ */
 export const canActivateClerk: CanActivateFn = (_route, state) => {
   const clerk = inject(ClerkService);
 

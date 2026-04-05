@@ -22,6 +22,7 @@ import { ClerkService } from '../services/clerk.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
 })
+/** Renders the Clerk Organization Switcher UI component. */
 export class ClerkOrganizationSwitcherComponent implements AfterViewInit, OnDestroy {
   @ViewChild('ref') ref: ElementRef | null = null;
   @Input() props: OrganizationSwitcherProps | undefined;
