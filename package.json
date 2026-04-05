@@ -3,9 +3,10 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build && cp ./README.md ./dist/ngx-clerk/README.md",
-    "watch": "ng build --watch --configuration development",
+    "start": "ng serve demo",
+    "dev": "ng build ngx-clerk --watch & ng serve demo",
+    "build": "ng build ngx-clerk && cp ./README.md ./dist/ngx-clerk/README.md",
+    "watch": "ng build ngx-clerk --watch --configuration development",
     "lint": "ng lint",
     "release": "semantic-release",
     "prepare": "husky"
@@ -34,6 +35,7 @@
     "@angular-eslint/eslint-plugin": "^21.3.1",
     "@angular-eslint/eslint-plugin-template": "^21.3.1",
     "@angular-eslint/template-parser": "^21.3.1",
+    "@angular/build": "^21.2.6",
     "@angular/cli": "^21.0.0",
     "@angular/compiler-cli": "^21.0.0",
     "@commitlint/cli": "^20.5.0",
