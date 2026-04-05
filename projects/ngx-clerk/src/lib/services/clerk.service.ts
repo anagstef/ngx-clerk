@@ -36,6 +36,17 @@ declare global {
   }
 }
 
+/**
+ * Core service for interacting with Clerk authentication.
+ * Provides reactive signals for auth state and methods for UI controls.
+ *
+ * @example
+ * ```ts
+ * const clerk = inject(ClerkService);
+ * const user = clerk.user();
+ * const isSignedIn = clerk.isSignedIn();
+ * ```
+ */
 @Injectable({
   providedIn: 'root',
 })
@@ -53,16 +64,25 @@ export class ClerkService {
   private readonly _user = signal<UserResource | null>(null);
   private readonly _organization = signal<OrganizationResource | null>(null);
 
+  /** The current Clerk instance. `null` until Clerk has loaded. */
   readonly clerk = this._clerk.asReadonly();
+  /** The current Clerk client resource. */
   readonly client = this._client.asReadonly();
+  /** The current active session. `null` when not signed in. */
   readonly session = this._session.asReadonly();
+  /** The current user. `null` when not signed in. */
   readonly user = this._user.asReadonly();
+  /** The current active organization. `null` when no organization is active. */
   readonly organization = this._organization.asReadonly();
 
   // Derived signals
+  /** Whether Clerk has finished loading. */
   readonly isLoaded = computed(() => this._clerk() !== null);
+  /** Whether a user is currently signed in. */
   readonly isSignedIn = computed(() => !!this._user()?.id);
+  /** The current user's ID, or `null` if not signed in. */
   readonly userId = computed(() => this._user()?.id ?? null);
+  /** The current active organization's ID, or `null` if none is active. */
   readonly orgId = computed(() => this._organization()?.id ?? null);
 
   /**
@@ -122,6 +142,7 @@ export class ClerkService {
 
   // --- Appearance & Localization ---
 
+  /** Updates the global appearance configuration for all Clerk components. */
   updateAppearance(opts: ClerkOptions['appearance']) {
     const clerkInstance = this.clerk();
     if (clerkInstance) {
@@ -129,6 +150,7 @@ export class ClerkService {
     }
   }
 
+  /** Updates the localization configuration for all Clerk components. */
   updateLocalization(opts: ClerkOptions['localization']) {
     const clerkInstance = this.clerk();
     if (clerkInstance) {
@@ -138,58 +160,71 @@ export class ClerkService {
 
   // --- Open / Close UI ---
 
+  /** Opens the sign-in modal. */
   openSignIn(opts?: SignInProps) {
     this.clerk()?.openSignIn(opts);
   }
 
+  /** Closes the sign-in modal. */
   closeSignIn() {
     this.clerk()?.closeSignIn();
   }
 
+  /** Opens the sign-up modal. */
   openSignUp(opts?: SignUpProps) {
     this.clerk()?.openSignUp(opts);
   }
 
+  /** Closes the sign-up modal. */
   closeSignUp() {
     this.clerk()?.closeSignUp();
   }
 
+  /** Opens the user profile modal. */
   openUserProfile(opts?: UserProfileProps) {
     this.clerk()?.openUserProfile(opts);
   }
 
+  /** Closes the user profile modal. */
   closeUserProfile() {
     this.clerk()?.closeUserProfile();
   }
 
+  /** Opens the organization profile modal. */
   openOrganizationProfile(opts?: OrganizationProfileProps) {
     this.clerk()?.openOrganizationProfile(opts);
   }
 
+  /** Closes the organization profile modal. */
   closeOrganizationProfile() {
     this.clerk()?.closeOrganizationProfile();
   }
 
+  /** Opens the create organization modal. */
   openCreateOrganization(opts?: CreateOrganizationProps) {
     this.clerk()?.openCreateOrganization(opts);
   }
 
+  /** Closes the create organization modal. */
   closeCreateOrganization() {
     this.clerk()?.closeCreateOrganization();
   }
 
   // --- Redirects ---
 
+  /** Redirects to the Clerk sign-in page. */
   redirectToSignIn(opts?: SignInRedirectOptions) {
     this.clerk()?.redirectToSignIn(opts);
   }
 
+  /** Redirects to the Clerk sign-up page. */
   redirectToSignUp(opts?: SignUpRedirectOptions) {
     this.clerk()?.redirectToSignUp(opts);
   }
 
   // --- Sign Out ---
 
+  /** Signs out the current user. */
   signOut(opts?: Parameters<Clerk['signOut']>[0]) {
     return this.clerk()?.signOut(opts) ?? Promise.resolve();
   }
