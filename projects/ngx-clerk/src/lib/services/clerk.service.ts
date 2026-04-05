@@ -1,10 +1,24 @@
-import { Injectable, NgZone, Inject, PLATFORM_ID } from '@angular/core';
+import { Injectable, NgZone, PLATFORM_ID, computed, inject, signal } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { Router } from '@angular/router';
-import { ActiveSessionResource, Clerk, ClerkOptions, ClientResource, CreateOrganizationProps, OrganizationProfileProps, OrganizationResource, SignInProps, SignInRedirectOptions, SignUpProps, SignUpRedirectOptions, UserProfileProps, UserResource, Without } from '@clerk/types';
-import { ReplaySubject, take } from 'rxjs';
-import { ClerkInitOptions } from '../utils/types';
-import { loadClerkJsScript } from '../utils/loadClerkJsScript';
+import type {
+  ActiveSessionResource,
+  Clerk,
+  ClerkOptions,
+  ClientResource,
+  CreateOrganizationProps,
+  OrganizationProfileProps,
+  OrganizationResource,
+  SignInProps,
+  SignInRedirectOptions,
+  SignUpProps,
+  SignUpRedirectOptions,
+  UserProfileProps,
+  UserResource,
+  Without,
+} from '@clerk/shared/types';
+import { loadClerkScripts } from '../utils/loadClerkJsScript';
+import type { ClerkInitOptions } from '../utils/types';
 
 interface HeadlessBrowserClerk extends Clerk {
   load: (opts?: Without<ClerkOptions, 'isSatellite'>) => Promise<void>;
@@ -23,145 +37,160 @@ declare global {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ClerkService {
-  public readonly clerk$: ReplaySubject<HeadlessBrowserClerk | BrowserClerk> = new ReplaySubject(1);
-  public readonly client$: ReplaySubject<ClientResource | undefined> = new ReplaySubject(1);
-  public readonly session$: ReplaySubject<ActiveSessionResource | undefined | null> = new ReplaySubject(1);
-  public readonly user$: ReplaySubject<UserResource | undefined | null> = new ReplaySubject(1);
-  public readonly organization$: ReplaySubject<OrganizationResource | undefined  | null> = new ReplaySubject(1);
+  private readonly _platformId = inject(PLATFORM_ID);
+  private readonly _router = inject(Router);
+  private readonly _ngZone = inject(NgZone);
 
-  private _initialized: boolean = false;
+  private _initialized = false;
 
-  constructor(
-    @Inject(PLATFORM_ID) private platformId: Object,
-    private _router: Router,
-    private _ngZone: NgZone) {} 
+  // Core state signals (private writable, public readonly)
+  private readonly _clerk = signal<HeadlessBrowserClerk | BrowserClerk | null>(null);
+  private readonly _client = signal<ClientResource | null>(null);
+  private readonly _session = signal<ActiveSessionResource | null>(null);
+  private readonly _user = signal<UserResource | null>(null);
+  private readonly _organization = signal<OrganizationResource | null>(null);
 
-  public __init(options: ClerkInitOptions) {
-    if (!isPlatformBrowser(this.platformId)) {
-      // ClerkService can only be used in the browser
-      return;
+  readonly clerk = this._clerk.asReadonly();
+  readonly client = this._client.asReadonly();
+  readonly session = this._session.asReadonly();
+  readonly user = this._user.asReadonly();
+  readonly organization = this._organization.asReadonly();
+
+  // Derived signals
+  readonly isLoaded = computed(() => this._clerk() !== null);
+  readonly isSignedIn = computed(() => !!this._user()?.id);
+  readonly userId = computed(() => this._user()?.id ?? null);
+  readonly orgId = computed(() => this._organization()?.id ?? null);
+
+  /**
+   * Initialize ClerkJS. Called internally by provideClerk() via APP_INITIALIZER.
+   * Do not call directly -- use provideClerk() in your app config.
+   */
+  initialize(options: ClerkInitOptions): Promise<void> {
+    if (!isPlatformBrowser(this._platformId)) {
+      return Promise.resolve();
     }
     if (this._initialized) {
       console.warn('ClerkService already initialized');
-      return;
+      return Promise.resolve();
     }
     this._initialized = true;
-    loadClerkJsScript(options).then(async () => {
+
+    const { clerkPromise, clerkUICtorPromise } = loadClerkScripts(options);
+
+    return clerkPromise.then(async () => {
+      const { publishableKey, __internal_clerkJSUrl, __internal_clerkJSVersion, sdkMetadata, ...loadOptions } = options;
       await window.Clerk.load({
-        routerPush: (to: string) => this._ngZone.run(() => {
-          const url = new URL(to.replace('#/', ''), 'http://dummy.clerk');
-          const queryParams = Object.fromEntries((url.searchParams as any).entries());
-          return this._router.navigate([url.pathname], { queryParams });
-        }), 
-        routerReplace: (to: string) => this._ngZone.run(() => {
-          const url = new URL(to.replace('#/', ''), 'http://dummy.clerk');
-          const queryParams = Object.fromEntries((url.searchParams as any).entries());
-          return this._router.navigate([url.pathname], { queryParams, replaceUrl: true });
-        }),
-        ...options
-      });
-      this.client$.next(window.Clerk.client);
-      this.session$.next(window.Clerk.session);
-      this.user$.next(window.Clerk.user);
-      this.organization$.next(window.Clerk.organization);
+        routerPush: (to: string) =>
+          this._ngZone.run(() => {
+            const url = new URL(to.replace('#/', ''), 'http://dummy.clerk');
+            const queryParams = Object.fromEntries((url.searchParams as any).entries());
+            return this._router.navigate([url.pathname], { queryParams });
+          }),
+        routerReplace: (to: string) =>
+          this._ngZone.run(() => {
+            const url = new URL(to.replace('#/', ''), 'http://dummy.clerk');
+            const queryParams = Object.fromEntries((url.searchParams as any).entries());
+            return this._router.navigate([url.pathname], { queryParams, replaceUrl: true });
+          }),
+        ...loadOptions,
+        ui: { ClerkUI: clerkUICtorPromise },
+      } as any);
 
-      // emits all of them every time 1 thing changes
+      this._ngZone.run(() => {
+        this._client.set(window.Clerk.client ?? null);
+        this._session.set((window.Clerk.session as ActiveSessionResource) ?? null);
+        this._user.set(window.Clerk.user ?? null);
+        this._organization.set(window.Clerk.organization ?? null);
+        this._clerk.set(window.Clerk);
+      });
+
       window.Clerk.addListener((resources) => {
-        this.client$.next(resources.client);
-        this.session$.next(resources.session);
-        this.user$.next(resources.user);
-        this.organization$.next(resources.organization);
-        this.clerk$.next(window.Clerk);
+        this._ngZone.run(() => {
+          this._client.set(resources.client ?? null);
+          this._session.set((resources.session as ActiveSessionResource) ?? null);
+          this._user.set(resources.user ?? null);
+          this._organization.set(resources.organization ?? null);
+          this._clerk.set(window.Clerk);
+        });
       });
-
-      this.clerk$.next(window.Clerk);
     });
   }
 
-  public updateAppearance(opts: ClerkOptions['appearance']) {
-    this.clerk$.pipe(take(1)).subscribe((clerk) => {
-      (clerk as any).__unstable__updateProps({ appearance: opts });
-    });
+  // --- Appearance & Localization ---
+
+  updateAppearance(opts: ClerkOptions['appearance']) {
+    const clerkInstance = this.clerk();
+    if (clerkInstance) {
+      (clerkInstance as any).__internal_updateProps({ appearance: opts });
+    }
   }
 
-  public updateLocalization(opts: ClerkOptions['localization']) {
-    this.clerk$.pipe(take(1)).subscribe((clerk) => {
-      (clerk as any).__unstable__updateProps({ localization: opts });
-    });
+  updateLocalization(opts: ClerkOptions['localization']) {
+    const clerkInstance = this.clerk();
+    if (clerkInstance) {
+      (clerkInstance as any).__internal_updateProps({ localization: opts });
+    }
   }
 
-  public openSignIn(opts?: SignInProps) {
-    this.clerk$.pipe(take(1)).subscribe((clerk) => {
-      clerk.openSignIn(opts);
-    });
+  // --- Open / Close UI ---
+
+  openSignIn(opts?: SignInProps) {
+    this.clerk()?.openSignIn(opts);
   }
 
-  public closeSignIn() {
-    this.clerk$.pipe(take(1)).subscribe((clerk) => {
-      clerk.closeSignIn();
-    });
+  closeSignIn() {
+    this.clerk()?.closeSignIn();
   }
 
-  public openSignUp(opts?: SignUpProps) {
-    this.clerk$.pipe(take(1)).subscribe((clerk) => {
-      clerk.openSignUp(opts);
-    });
+  openSignUp(opts?: SignUpProps) {
+    this.clerk()?.openSignUp(opts);
   }
 
-  public closeSignUp() {
-    this.clerk$.pipe(take(1)).subscribe((clerk) => {
-      clerk.closeSignUp();
-    });
+  closeSignUp() {
+    this.clerk()?.closeSignUp();
   }
 
-  public openUserProfile(opts?: UserProfileProps) {
-    this.clerk$.pipe(take(1)).subscribe((clerk) => {
-      clerk.openUserProfile(opts);
-    });
+  openUserProfile(opts?: UserProfileProps) {
+    this.clerk()?.openUserProfile(opts);
   }
 
-  public closeUserProfile() {
-    this.clerk$.pipe(take(1)).subscribe((clerk) => {
-      clerk.closeUserProfile();
-    });
+  closeUserProfile() {
+    this.clerk()?.closeUserProfile();
   }
 
-  public openOrganizationProfile(opts?: OrganizationProfileProps) {
-    this.clerk$.pipe(take(1)).subscribe((clerk) => {
-      clerk.openOrganizationProfile(opts);
-    });
+  openOrganizationProfile(opts?: OrganizationProfileProps) {
+    this.clerk()?.openOrganizationProfile(opts);
   }
 
-  public closeOrganizationProfile() {
-    this.clerk$.pipe(take(1)).subscribe((clerk) => {
-      clerk.closeOrganizationProfile();
-    });
+  closeOrganizationProfile() {
+    this.clerk()?.closeOrganizationProfile();
   }
 
-  public openCreateOrganization(opts?: CreateOrganizationProps) {
-    this.clerk$.pipe(take(1)).subscribe((clerk) => {
-      clerk.openCreateOrganization(opts);
-    });
+  openCreateOrganization(opts?: CreateOrganizationProps) {
+    this.clerk()?.openCreateOrganization(opts);
   }
 
-  public closeCreateOrganization() {
-    this.clerk$.pipe(take(1)).subscribe((clerk) => {
-      clerk.closeCreateOrganization();
-    });
+  closeCreateOrganization() {
+    this.clerk()?.closeCreateOrganization();
   }
 
-  public redirectToSignIn(opts?: SignInRedirectOptions) {
-    this.clerk$.pipe(take(1)).subscribe((clerk) => {
-      clerk.redirectToSignIn(opts);
-    });
+  // --- Redirects ---
+
+  redirectToSignIn(opts?: SignInRedirectOptions) {
+    this.clerk()?.redirectToSignIn(opts);
   }
 
-  public redirectToSignUp(opts?: SignUpRedirectOptions) {
-    this.clerk$.pipe(take(1)).subscribe((clerk) => {
-      clerk.redirectToSignUp(opts);
-    });
+  redirectToSignUp(opts?: SignUpRedirectOptions) {
+    this.clerk()?.redirectToSignUp(opts);
+  }
+
+  // --- Sign Out ---
+
+  signOut(opts?: Parameters<Clerk['signOut']>[0]) {
+    return this.clerk()?.signOut(opts) ?? Promise.resolve();
   }
 }

@@ -2,16 +2,15 @@
 
 Welcome to **ngx-clerk**, an unofficial Angular package that integrates with [Clerk](https://clerk.com/).
 
-### ⚠️ Disclaimer: This unofficial package is not affiliated with Clerk.com. It is an unofficial project that aims to provide a seamless integration of Clerk features into Angular applications.
+### Disclaimer: This unofficial package is not affiliated with Clerk.com. It is an unofficial project that aims to provide a seamless integration of Clerk features into Angular applications.
 
 ## Prerequisites
 
-- Angular version **17 or higher**.
+- Angular version **19 or higher**.
+- Clerk Core 3 (ClerkJS v6).
 - Currently, this package supports **client-side operations only**. Server-Side Rendering (SSR) is not supported at the moment.
 
 ## Installation
-
-To install `ngx-clerk`, run the following command in your project directory:
 
 ```bash
 npm i ngx-clerk
@@ -19,57 +18,85 @@ npm i ngx-clerk
 
 ## Getting Started
 
-To begin using `ngx-clerk` in your project, follow these steps:
 1. Create an app in [Clerk Dashboard](https://dashboard.clerk.com/) and get the Publishable Key.
-2. **Inject the ClerkService**: In your `app.component.ts`, inject the `ClerkService` and call its `__init` method. You need to provide at least the Publishable Key and, optionally, any `ClerkOptions`.
+2. **Add `provideClerk()` to your app config**:
+
 ```typescript
-// Example: app.component.ts
+// app.config.ts
+import { ApplicationConfig } from '@angular/core';
+import { provideRouter } from '@angular/router';
+import { provideClerk } from 'ngx-clerk';
+import { routes } from './app.routes';
+
+export const appConfig: ApplicationConfig = {
+  providers: [
+    provideRouter(routes),
+    provideClerk({
+      publishableKey: 'pk_test_XXXXXXXX',
+    }),
+  ],
+};
+```
+
+3. **Use Clerk components in your templates**:
+
+```typescript
+// app.component.ts
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { ClerkService } from 'ngx-clerk';
+import { ClerkUserButtonComponent } from 'ngx-clerk';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  imports: [RouterOutlet, ClerkUserButtonComponent],
+  template: `
+    <clerk-user-button />
+    <router-outlet />
+  `,
 })
-export class AppComponent {
-  constructor(private _clerk: ClerkService) {
-    this._clerk.__init({ 
-      publishableKey: 'pk_test_XXXXXXXX'
-     });
-  }
-}
-
+export class AppComponent {}
 ```
-3. **Utilize Observables**: Use the observables provided by the `ClerkService` to access and manage the state throughout your application.
-4. **Route Guarding**: Leverage the guard to protect routes, ensuring that certain parts of your application are accessible only after authentication.
+
+4. **Protect routes** with the `canActivateClerk` guard:
+
 ```typescript
-// Example: app-routes.ts
+// app.routes.ts
 import { Routes } from '@angular/router';
-import { catchAllRoute, AuthGuardService } from 'ngx-clerk';
-import { UserProfilePageComponent } from './pages/user-profile-page.component';
-import { HomePageComponent } from './pages/home-page.component';
+import { canActivateClerk } from 'ngx-clerk';
 
 export const routes: Routes = [
-    { 
-        matcher: catchAllRoute('user'), 
-        component: UserProfilePageComponent, 
-        canActivate: [AuthGuardService] 
-    },
-    { 
-        path: '', 
-        component: HomePageComponent
-    }
+  { path: '', component: HomeComponent },
+  {
+    path: 'dashboard',
+    component: DashboardComponent,
+    canActivate: [canActivateClerk],
+  },
 ];
+```
 
+5. **Access auth state** via signals on `ClerkService`:
+
+```typescript
+import { Component, inject } from '@angular/core';
+import { ClerkService } from 'ngx-clerk';
+
+@Component({
+  selector: 'app-dashboard',
+  template: `
+    @if (clerk.user(); as user) {
+      <p>Hello {{ user.firstName }}</p>
+    }
+  `,
+})
+export class DashboardComponent {
+  clerk = inject(ClerkService);
+}
 ```
 
 ## Features
 
-- **Clerk UI Components**: All Clerk UI components are readily available and prefixed with `clerk-`. Available components:
+- **Clerk UI Components**: All Clerk UI components are available and prefixed with `clerk-`:
     1. `<clerk-sign-in />`
     2. `<clerk-sign-up />`
     3. `<clerk-user-profile />`
@@ -78,21 +105,23 @@ export const routes: Routes = [
     6. `<clerk-organization-switcher />`
     7. `<clerk-organization-list />`
     8. `<clerk-create-organization />`
+    9. `<clerk-waitlist />`
+    10. `<clerk-user-avatar />`
+    11. `<clerk-pricing-table />`
 
-- **ClerkService**: This service is a central part of the package, offering observables for various Clerk resources:
-    - `user$` - Emits every time the `UserResource` is updated
-    - `session$` - Emits every time the `SessionResource` is updated
-    - `organization$` - Emits every time the `OrganizationResource` is updated
-    - `client$` - Emits every time the `ClientResource` is updated
-    - `clerk$` - Emits when Clerk has loaded
-- **AuthGuardService**: This service implements a `canActivate` that can be used to protect routes in your application.
+- **ClerkService**: Central service exposing auth state as Angular signals:
+    - `user()` - Current `UserResource` or `null`
+    - `session()` - Current `ActiveSessionResource` or `null`
+    - `organization()` - Current `OrganizationResource` or `null`
+    - `client()` - Current `ClientResource` or `null`
+    - `clerk()` - The Clerk instance or `null`
+    - `isLoaded()` - Whether Clerk has finished loading
+    - `isSignedIn()` - Whether the user is signed in
+    - `userId()` - Current user ID or `null`
+    - `orgId()` - Current organization ID or `null`
 
-## Remaining Tasks
+- **`canActivateClerk`**: A functional route guard that protects routes and waits for Clerk to load before checking auth state.
 
-While `ngx-clerk` aims to provide a comprehensive solution for integrating Clerk into Angular applications, there are several areas that are still under development:
+## Migrating from v0.x
 
-- Enhanced API for Custom Pages.
-- Implement support for Organization multidomain and proxy features.
-- Add support for Server-Side Rendering (SSR) and Static Site Generation (SSG).
-
-We welcome contributions and suggestions from the community to help us address these tasks and improve `ngx-clerk`.
+See [MIGRATION.md](./MIGRATION.md) for a detailed upgrade guide.

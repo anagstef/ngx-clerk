@@ -1,4 +1,13 @@
-// Clerk Components
+// Provider
+export { provideClerk, CLERK_OPTIONS } from './lib/provider';
+
+// Services
+export { ClerkService } from './lib/services/clerk.service';
+
+// Guards
+export { canActivateClerk } from './lib/guards/auth.guard';
+
+// Components
 export { ClerkSignInComponent } from './lib/components/sign-in.component';
 export { ClerkSignUpComponent } from './lib/components/sign-up.component';
 export { ClerkUserProfileComponent } from './lib/components/user-profile.component';
@@ -7,15 +16,13 @@ export { ClerkOrganizationProfileComponent } from './lib/components/organization
 export { ClerkOrganizationSwitcherComponent } from './lib/components/organization-switcher.component';
 export { ClerkCreateOrganizationComponent } from './lib/components/create-organization.component';
 export { ClerkOrganizationListComponent } from './lib/components/organization-list.component';
-
-// Clerk Services
-export { ClerkService } from './lib/services/clerk.service';
-
-// Clerk Guards
-export { ClerkAuthGuardService } from './lib/guards/auth-guard.service';
+export { ClerkWaitlistComponent } from './lib/components/waitlist.component';
+export { ClerkUserAvatarComponent } from './lib/components/user-avatar.component';
+export { ClerkPricingTableComponent } from './lib/components/pricing-table.component';
 
 // Utils
 export { catchAllRoute } from './lib/utils/route-utils';
 
 // Types
-export * from '@clerk/types';
+export type { ClerkInitOptions } from './lib/utils/types';
+export * from '@clerk/shared/types';

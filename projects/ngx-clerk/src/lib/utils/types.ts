@@ -1,9 +1,12 @@
-import { ClerkOptions, SDKMetadata, Without } from "@clerk/types";
+import type { ClerkOptions, SDKMetadata } from '@clerk/shared/types';
 
-export type ClerkInitOptions = Without<ClerkOptions, 'isSatellite'> & { 
-    publishableKey: string;   
-    clerkJSUrl?: string;
-    clerkJSVariant?: 'headless' | '';
-    clerkJSVersion?: string;
-    sdkMetadata?: SDKMetadata; 
+export type ClerkInitOptions = Omit<ClerkOptions, 'isSatellite'> & {
+  publishableKey: string;
+  isSatellite?: boolean | ((url: URL) => boolean);
+  proxyUrl?: string;
+  domain?: string;
+  nonce?: string;
+  sdkMetadata?: SDKMetadata;
+  __internal_clerkJSUrl?: string;
+  __internal_clerkJSVersion?: string;
 };

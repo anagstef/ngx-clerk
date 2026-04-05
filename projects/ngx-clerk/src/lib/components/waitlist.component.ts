@@ -11,20 +11,20 @@ import {
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
-import type { OrganizationListProps } from '@clerk/shared/types';
+import type { WaitlistProps } from '@clerk/shared/types';
 import { ClerkService } from '../services/clerk.service';
 
 @Component({
-  selector: 'clerk-organization-list',
+  selector: 'clerk-waitlist',
   standalone: true,
   imports: [],
   template: `<div #ref></div>`,
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
 })
-export class ClerkOrganizationListComponent implements AfterViewInit, OnDestroy {
+export class ClerkWaitlistComponent implements AfterViewInit, OnDestroy {
   @ViewChild('ref') ref: ElementRef | null = null;
-  @Input() props: OrganizationListProps | undefined;
+  @Input() props: WaitlistProps | undefined;
 
   private _clerk = inject(ClerkService);
   private _injector = inject(Injector);
@@ -33,13 +33,13 @@ export class ClerkOrganizationListComponent implements AfterViewInit, OnDestroy 
   ngAfterViewInit() {
     const clerkInstance = this._clerk.clerk();
     if (clerkInstance && this.ref) {
-      clerkInstance.mountOrganizationList(this.ref.nativeElement, this.props);
+      clerkInstance.mountWaitlist(this.ref.nativeElement, this.props);
       this._mounted = true;
     } else {
       const mountEffect = effect(() => {
         const c = this._clerk.clerk();
         if (c && this.ref && !this._mounted) {
-          c.mountOrganizationList(this.ref.nativeElement, this.props);
+          c.mountWaitlist(this.ref.nativeElement, this.props);
           this._mounted = true;
           mountEffect.destroy();
         }
@@ -50,7 +50,7 @@ export class ClerkOrganizationListComponent implements AfterViewInit, OnDestroy 
   ngOnDestroy() {
     const clerkInstance = this._clerk.clerk();
     if (clerkInstance && this.ref && this._mounted) {
-      clerkInstance.unmountOrganizationList(this.ref.nativeElement);
+      clerkInstance.unmountWaitlist(this.ref.nativeElement);
     }
   }
 }

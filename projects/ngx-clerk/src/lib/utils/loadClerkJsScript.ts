@@ -1,41 +1,52 @@
-import { parsePublishableKey } from '@clerk/shared/keys';
-import { loadScript } from '@clerk/shared/loadScript';
-
+import {
+  loadClerkJSScript as loadClerkJSScriptShared,
+  loadClerkUIScript as loadClerkUIScriptShared,
+} from '@clerk/shared/loadClerkJsScript';
 import type { ClerkInitOptions } from './types';
+
+declare global {
+  interface Window {
+    __internal_ClerkUICtor: any;
+  }
+}
 
 const FAILED_TO_LOAD_ERROR = 'Clerk: Failed to load Clerk';
 
-export const loadClerkJsScript = (opts: ClerkInitOptions) => {
+/**
+ * Loads ClerkJS and ClerkUI scripts in parallel.
+ * Returns a promise for the ClerkUI constructor to be passed to Clerk.load().
+ */
+export const loadClerkScripts = (opts: ClerkInitOptions): { clerkPromise: Promise<any>; clerkUICtorPromise: Promise<any> } => {
   const { publishableKey } = opts;
 
   if (!publishableKey) {
     throw new Error('ClerkService requires a publishableKey');
   }
 
-  return loadScript(clerkJsScriptUrl(opts), {
-    async: true,
-    crossOrigin: 'anonymous',
-    beforeLoad: applyClerkJsScriptAttributes(opts),
-  }).catch(() => {
+  const scriptOpts = {
+    publishableKey,
+    proxyUrl: opts.proxyUrl,
+    domain: opts.domain,
+    nonce: opts.nonce,
+    sdkMetadata: opts.sdkMetadata,
+    __internal_clerkJSUrl: opts.__internal_clerkJSUrl,
+    __internal_clerkJSVersion: opts.__internal_clerkJSVersion,
+  };
+
+  const uiOpts = { publishableKey, proxyUrl: opts.proxyUrl, domain: opts.domain, nonce: opts.nonce };
+
+  // Fire both downloads in parallel (same approach as Vue SDK)
+  const clerkPromise = loadClerkJSScriptShared(scriptOpts).catch(() => {
     throw new Error(FAILED_TO_LOAD_ERROR);
   });
-};
 
-const clerkJsScriptUrl = (opts: ClerkInitOptions) => {
-  const { clerkJSUrl, clerkJSVariant, clerkJSVersion = '5', publishableKey } = opts;
+  const clerkUICtorPromise = (async () => {
+    await loadClerkUIScriptShared(uiOpts);
+    if (!window.__internal_ClerkUICtor) {
+      throw new Error('Failed to download latest Clerk UI. Contact support@clerk.com.');
+    }
+    return window.__internal_ClerkUICtor;
+  })();
 
-  if (clerkJSUrl) {
-    return clerkJSUrl;
-  }
-
-  const scriptHost = parsePublishableKey(publishableKey)?.frontendApi || '';
-  const variant = clerkJSVariant ? `${clerkJSVariant.replace(/\.+$/, '')}.` : '';
-  return `https://${scriptHost}/npm/@clerk/clerk-js@${clerkJSVersion}/dist/clerk.${variant}browser.js`;
-};
-
-const applyClerkJsScriptAttributes = (options: ClerkInitOptions) => (script: HTMLScriptElement) => {
-  const { publishableKey } = options;
-  if (publishableKey) {
-    script.setAttribute('data-clerk-publishable-key', publishableKey);
-  }
+  return { clerkPromise, clerkUICtorPromise };
 };
