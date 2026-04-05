@@ -11,6 +11,9 @@
     "prepare": "husky"
   },
   "private": true,
+  "engines": {
+    "node": ">=24.0.0"
+  },
   "packageManager": "pnpm@10.33.0",
   "dependencies": {
     "@angular/animations": "^21.0.0",
