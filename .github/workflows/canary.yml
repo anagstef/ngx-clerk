@@ -36,7 +36,7 @@ jobs:
           CANARY_VERSION="${BASE_VERSION}-canary.${SHORT_SHA}"
           echo "Publishing ${CANARY_VERSION}"
           cd dist/ngx-clerk
-          npm version "${CANARY_VERSION}" --no-git-tag-version
+          pnpm version "${CANARY_VERSION}" --no-git-tag-version
 
       - name: Publish canary
         run: pnpm publish --tag canary --no-git-checks
