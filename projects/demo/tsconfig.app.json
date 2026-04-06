@@ -4,7 +4,12 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "outDir": "../../out-tsc/app",
-    "types": []
+    "types": [],
+    "paths": {
+      "ngx-clerk": [
+        "../../dist/ngx-clerk"
+      ]
+    }
   },
   "include": [
     "src/**/*.ts"

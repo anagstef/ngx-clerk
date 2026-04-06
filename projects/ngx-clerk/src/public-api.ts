@@ -25,4 +25,4 @@ export { catchAllRoute } from './lib/utils/route-utils';
 
 // Types
 export type { ClerkInitOptions } from './lib/utils/types';
-export * from '@clerk/shared/types';
+export type * from '@clerk/shared/types';

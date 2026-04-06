@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve demo",
-    "dev": "ng build ngx-clerk --watch & ng serve demo",
+    "dev": "ng build ngx-clerk && ng serve demo",
     "build": "ng build ngx-clerk && cp ./README.md ./dist/ngx-clerk/README.md",
     "watch": "ng build ngx-clerk --watch --configuration development",
     "lint": "ng lint",
