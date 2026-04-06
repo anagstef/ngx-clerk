@@ -6,7 +6,7 @@ import { ClerkSignInComponent } from 'ngx-clerk';
   selector: 'app-sign-in',
   imports: [RouterLink, ClerkSignInComponent],
   template: `
-    <div class="min-h-screen bg-gradient-to-br from-[#0a0a0a] to-[#1a1a2e] flex flex-col items-center justify-center px-4">
+    <div class="min-h-screen bg-gradient-to-br from-dark to-dark-end flex flex-col items-center justify-center px-4">
       <a routerLink="/" class="text-sm text-gray-400 hover:text-white transition-colors mb-8">
         &larr; Back to home
       </a>

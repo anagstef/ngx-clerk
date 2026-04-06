@@ -6,7 +6,7 @@ import { ClerkService } from 'ngx-clerk';
   selector: 'app-home',
   imports: [RouterLink],
   template: `
-    <div class="min-h-screen bg-gradient-to-br from-[#0a0a0a] to-[#1a1a2e] text-white">
+    <div class="min-h-screen bg-gradient-to-br from-dark to-dark-end text-white">
       <!-- Navigation -->
       <nav class="flex items-center justify-between px-6 py-4 max-w-6xl mx-auto">
         <span class="text-lg font-bold tracking-tight">ngx-clerk</span>
