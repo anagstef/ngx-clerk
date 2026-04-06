@@ -17,6 +17,28 @@ export const routes: Routes = [
   {
     path: 'dashboard',
     canActivate: [canActivateClerk],
-    loadComponent: () => import('./pages/dashboard.component').then(m => m.DashboardComponent),
+    loadComponent: () => import('./pages/dashboard/layout.component').then(m => m.DashboardLayoutComponent),
+    children: [
+      {
+        path: '',
+        loadComponent: () => import('./pages/dashboard/dashboard-home.component').then(m => m.DashboardHomeComponent),
+      },
+      {
+        path: 'user-profile',
+        loadComponent: () => import('./pages/dashboard/user-profile.component').then(m => m.UserProfilePageComponent),
+      },
+      {
+        path: 'organization-profile',
+        loadComponent: () => import('./pages/dashboard/org-profile.component').then(m => m.OrgProfilePageComponent),
+      },
+      {
+        path: 'create-organization',
+        loadComponent: () => import('./pages/dashboard/create-org.component').then(m => m.CreateOrgPageComponent),
+      },
+      {
+        path: 'organization-list',
+        loadComponent: () => import('./pages/dashboard/org-list.component').then(m => m.OrgListPageComponent),
+      },
+    ],
   },
 ];
