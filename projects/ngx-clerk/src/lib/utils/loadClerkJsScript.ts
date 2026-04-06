@@ -2,11 +2,12 @@ import {
   loadClerkJSScript as loadClerkJSScriptShared,
   loadClerkUIScript as loadClerkUIScriptShared,
 } from '@clerk/shared/loadClerkJsScript';
+import type { ClerkUIConstructor } from '@clerk/shared/types';
 import type { ClerkInitOptions } from './types';
 
 declare global {
   interface Window {
-    __internal_ClerkUICtor: any;
+    __internal_ClerkUICtor: unknown;
   }
 }
 
@@ -16,7 +17,7 @@ const FAILED_TO_LOAD_ERROR = 'Clerk: Failed to load Clerk';
  * Loads ClerkJS and ClerkUI scripts in parallel.
  * Returns a promise for the ClerkUI constructor to be passed to Clerk.load().
  */
-export const loadClerkScripts = (opts: ClerkInitOptions): { clerkPromise: Promise<any>; clerkUICtorPromise: Promise<any> } => {
+export const loadClerkScripts = (opts: ClerkInitOptions): { clerkPromise: Promise<HTMLScriptElement | null>; clerkUICtorPromise: Promise<ClerkUIConstructor> } => {
   const { publishableKey } = opts;
 
   if (!publishableKey) {
@@ -45,7 +46,7 @@ export const loadClerkScripts = (opts: ClerkInitOptions): { clerkPromise: Promis
     if (!window.__internal_ClerkUICtor) {
       throw new Error('Failed to download latest Clerk UI. Contact support@clerk.com.');
     }
-    return window.__internal_ClerkUICtor;
+    return window.__internal_ClerkUICtor as ClerkUIConstructor;
   })();
 
   return { clerkPromise, clerkUICtorPromise };

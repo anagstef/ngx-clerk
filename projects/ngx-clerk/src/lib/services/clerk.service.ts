@@ -21,13 +21,14 @@ import { loadClerkScripts } from '../utils/loadClerkJsScript';
 import type { ClerkInitOptions } from '../utils/types';
 
 interface HeadlessBrowserClerk extends Clerk {
-  load: (opts?: Without<ClerkOptions, 'isSatellite'>) => Promise<void>;
+  load: (opts?: Without<ClerkOptions, 'isSatellite'> & Record<string, unknown>) => Promise<void>;
   updateClient: (client: ClientResource) => void;
+  __internal_updateProps: (props: Record<string, unknown>) => void;
 }
 
 interface BrowserClerk extends HeadlessBrowserClerk {
   onComponentsReady: Promise<void>;
-  components: any;
+  components: Record<string, unknown>;
 }
 
 declare global {
@@ -107,18 +108,20 @@ export class ClerkService {
         routerPush: (to: string) =>
           this._ngZone.run(() => {
             const url = new URL(to.replace('#/', ''), 'http://dummy.clerk');
-            const queryParams = Object.fromEntries((url.searchParams as any).entries());
+            const queryParams: Record<string, string> = {};
+            url.searchParams.forEach((v, k) => (queryParams[k] = v));
             return this._router.navigate([url.pathname], { queryParams });
           }),
         routerReplace: (to: string) =>
           this._ngZone.run(() => {
             const url = new URL(to.replace('#/', ''), 'http://dummy.clerk');
-            const queryParams = Object.fromEntries((url.searchParams as any).entries());
+            const queryParams: Record<string, string> = {};
+            url.searchParams.forEach((v, k) => (queryParams[k] = v));
             return this._router.navigate([url.pathname], { queryParams, replaceUrl: true });
           }),
         ...loadOptions,
         ui: { ClerkUI: clerkUICtorPromise },
-      } as any);
+      });
 
       this._ngZone.run(() => {
         this._client.set(window.Clerk.client ?? null);
@@ -146,7 +149,7 @@ export class ClerkService {
   updateAppearance(opts: ClerkOptions['appearance']) {
     const clerkInstance = this.clerk();
     if (clerkInstance) {
-      (clerkInstance as any).__internal_updateProps({ appearance: opts });
+      clerkInstance.__internal_updateProps({ appearance: opts });
     }
   }
 
@@ -154,7 +157,7 @@ export class ClerkService {
   updateLocalization(opts: ClerkOptions['localization']) {
     const clerkInstance = this.clerk();
     if (clerkInstance) {
-      (clerkInstance as any).__internal_updateProps({ localization: opts });
+      clerkInstance.__internal_updateProps({ localization: opts });
     }
   }
 
