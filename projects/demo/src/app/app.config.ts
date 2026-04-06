@@ -9,6 +9,22 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
-    provideClerk({ publishableKey: environment.clerkPublishableKey }),
+    provideClerk({
+      publishableKey: environment.clerkPublishableKey,
+      appearance: {
+        cssLayerName: 'clerk',
+        variables: {
+          colorPrimary: '#6c47ff',
+        },
+        elements: {
+          card: 'bg-white shadow-sm',
+          formButtonPrimary: 'bg-primary hover:bg-primary-hover',
+          socialButtonsBlockButton: 'bg-white border border-gray-200 hover:bg-gray-50',
+          socialButtonsBlockButtonText: 'font-semibold text-gray-600',
+          formButtonReset: 'text-primary hover:text-primary-hover',
+          footerActionLink: 'text-primary hover:text-primary-hover',
+        },
+      },
+    }),
   ],
 };
