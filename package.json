@@ -30,6 +30,11 @@
     "tslib": "^2.3.0",
     "zone.js": "~0.16.0"
   },
+  "pnpm": {
+    "overrides": {
+      "vite": ">=7.3.2"
+    }
+  },
   "devDependencies": {
     "@angular-devkit/build-angular": "^21.0.0",
     "@angular-eslint/eslint-plugin": "^21.3.1",
