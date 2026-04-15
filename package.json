@@ -30,6 +30,11 @@
     "tslib": "^2.3.0",
     "zone.js": "~0.16.0"
   },
+  "pnpm": {
+    "overrides": {
+      "vite": ">=7.3.2"
+    }
+  },
   "devDependencies": {
     "@angular-devkit/build-angular": "^21.0.0",
     "@angular-eslint/eslint-plugin": "^21.3.1",
@@ -44,11 +49,13 @@
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/exec": "^7.1.0",
     "@semantic-release/git": "^10.0.1",
+    "@tailwindcss/postcss": "^4.2.2",
     "angular-eslint": "^21.3.1",
     "eslint": "^10.2.0",
     "husky": "^9.1.7",
     "ng-packagr": "^21.0.0",
     "semantic-release": "^25.0.3",
+    "tailwindcss": "^4.2.2",
     "typescript": "~5.9.0",
     "typescript-eslint": "^8.58.0"
   }

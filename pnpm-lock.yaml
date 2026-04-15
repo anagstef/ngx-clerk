@@ -4,6 +4,9 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+overrides:
+  vite: '>=7.3.2'
+
 importers:
 
   .:
@@ -47,7 +50,7 @@ importers:
     devDependencies:
       '@angular-devkit/build-angular':
         specifier: ^21.0.0
-        version: 21.2.6(@angular/compiler-cli@21.2.7(@angular/compiler@21.2.7)(typescript@5.9.3))(@angular/compiler@21.2.7)(@angular/core@21.2.7(@angular/compiler@21.2.7)(rxjs@7.8.2)(zone.js@0.16.1))(@angular/platform-browser@21.2.7(@angular/animations@21.2.7(@angular/core@21.2.7(@angular/compiler@21.2.7)(rxjs@7.8.2)(zone.js@0.16.1)))(@angular/common@21.2.7(@angular/core@21.2.7(@angular/compiler@21.2.7)(rxjs@7.8.2)(zone.js@0.16.1))(rxjs@7.8.2))(@angular/core@21.2.7(@angular/compiler@21.2.7)(rxjs@7.8.2)(zone.js@0.16.1)))(@emnapi/core@1.9.2)(@emnapi/runtime@1.9.2)(@types/node@25.5.2)(chokidar@5.0.0)(jiti@2.6.1)(karma@6.4.4)(ng-packagr@21.2.2(@angular/compiler-cli@21.2.7(@angular/compiler@21.2.7)(typescript@5.9.3))(tslib@2.8.1)(typescript@5.9.3))(typescript@5.9.3)
+        version: 21.2.6(@angular/compiler-cli@21.2.7(@angular/compiler@21.2.7)(typescript@5.9.3))(@angular/compiler@21.2.7)(@angular/core@21.2.7(@angular/compiler@21.2.7)(rxjs@7.8.2)(zone.js@0.16.1))(@angular/platform-browser@21.2.7(@angular/animations@21.2.7(@angular/core@21.2.7(@angular/compiler@21.2.7)(rxjs@7.8.2)(zone.js@0.16.1)))(@angular/common@21.2.7(@angular/core@21.2.7(@angular/compiler@21.2.7)(rxjs@7.8.2)(zone.js@0.16.1))(rxjs@7.8.2))(@angular/core@21.2.7(@angular/compiler@21.2.7)(rxjs@7.8.2)(zone.js@0.16.1)))(@emnapi/core@1.9.2)(@emnapi/runtime@1.9.2)(@types/node@25.5.2)(chokidar@5.0.0)(jiti@2.6.1)(karma@6.4.4)(ng-packagr@21.2.2(@angular/compiler-cli@21.2.7(@angular/compiler@21.2.7)(typescript@5.9.3))(tailwindcss@4.2.2)(tslib@2.8.1)(typescript@5.9.3))(tailwindcss@4.2.2)(typescript@5.9.3)
       '@angular-eslint/eslint-plugin':
         specifier: ^21.3.1
         version: 21.3.1(@typescript-eslint/utils@8.58.0(eslint@10.2.0(jiti@2.6.1))(typescript@5.9.3))(eslint@10.2.0(jiti@2.6.1))(typescript@5.9.3)
@@ -59,7 +62,7 @@ importers:
         version: 21.3.1(eslint@10.2.0(jiti@2.6.1))(typescript@5.9.3)
       '@angular/build':
         specifier: ^21.2.6
-        version: 21.2.6(@angular/compiler-cli@21.2.7(@angular/compiler@21.2.7)(typescript@5.9.3))(@angular/compiler@21.2.7)(@angular/core@21.2.7(@angular/compiler@21.2.7)(rxjs@7.8.2)(zone.js@0.16.1))(@angular/platform-browser@21.2.7(@angular/animations@21.2.7(@angular/core@21.2.7(@angular/compiler@21.2.7)(rxjs@7.8.2)(zone.js@0.16.1)))(@angular/common@21.2.7(@angular/core@21.2.7(@angular/compiler@21.2.7)(rxjs@7.8.2)(zone.js@0.16.1))(rxjs@7.8.2))(@angular/core@21.2.7(@angular/compiler@21.2.7)(rxjs@7.8.2)(zone.js@0.16.1)))(@emnapi/core@1.9.2)(@emnapi/runtime@1.9.2)(@types/node@25.5.2)(chokidar@5.0.0)(jiti@2.6.1)(karma@6.4.4)(less@4.4.2)(ng-packagr@21.2.2(@angular/compiler-cli@21.2.7(@angular/compiler@21.2.7)(typescript@5.9.3))(tslib@2.8.1)(typescript@5.9.3))(postcss@8.5.8)(terser@5.46.0)(tslib@2.8.1)(typescript@5.9.3)
+        version: 21.2.6(@angular/compiler-cli@21.2.7(@angular/compiler@21.2.7)(typescript@5.9.3))(@angular/compiler@21.2.7)(@angular/core@21.2.7(@angular/compiler@21.2.7)(rxjs@7.8.2)(zone.js@0.16.1))(@angular/platform-browser@21.2.7(@angular/animations@21.2.7(@angular/core@21.2.7(@angular/compiler@21.2.7)(rxjs@7.8.2)(zone.js@0.16.1)))(@angular/common@21.2.7(@angular/core@21.2.7(@angular/compiler@21.2.7)(rxjs@7.8.2)(zone.js@0.16.1))(rxjs@7.8.2))(@angular/core@21.2.7(@angular/compiler@21.2.7)(rxjs@7.8.2)(zone.js@0.16.1)))(@emnapi/core@1.9.2)(@emnapi/runtime@1.9.2)(@types/node@25.5.2)(chokidar@5.0.0)(jiti@2.6.1)(karma@6.4.4)(less@4.4.2)(ng-packagr@21.2.2(@angular/compiler-cli@21.2.7(@angular/compiler@21.2.7)(typescript@5.9.3))(tailwindcss@4.2.2)(tslib@2.8.1)(typescript@5.9.3))(postcss@8.5.8)(tailwindcss@4.2.2)(terser@5.46.0)(tslib@2.8.1)(typescript@5.9.3)
       '@angular/cli':
         specifier: ^21.0.0
         version: 21.2.6(@types/node@25.5.2)(chokidar@5.0.0)
@@ -84,6 +87,9 @@ importers:
       '@semantic-release/git':
         specifier: ^10.0.1
         version: 10.0.1(semantic-release@25.0.3(typescript@5.9.3))
+      '@tailwindcss/postcss':
+        specifier: ^4.2.2
+        version: 4.2.2
       angular-eslint:
         specifier: ^21.3.1
         version: 21.3.1(@angular/cli@21.2.6(@types/node@25.5.2)(chokidar@5.0.0))(chokidar@5.0.0)(eslint@10.2.0(jiti@2.6.1))(typescript-eslint@8.58.0(eslint@10.2.0(jiti@2.6.1))(typescript@5.9.3))(typescript@5.9.3)
@@ -95,10 +101,13 @@ importers:
         version: 9.1.7
       ng-packagr:
         specifier: ^21.0.0
-        version: 21.2.2(@angular/compiler-cli@21.2.7(@angular/compiler@21.2.7)(typescript@5.9.3))(tslib@2.8.1)(typescript@5.9.3)
+        version: 21.2.2(@angular/compiler-cli@21.2.7(@angular/compiler@21.2.7)(typescript@5.9.3))(tailwindcss@4.2.2)(tslib@2.8.1)(typescript@5.9.3)
       semantic-release:
         specifier: ^25.0.3
         version: 25.0.3(typescript@5.9.3)
+      tailwindcss:
+        specifier: ^4.2.2
+        version: 4.2.2
       typescript:
         specifier: ~5.9.0
         version: 5.9.3
@@ -175,6 +184,10 @@ packages:
   '@algolia/requester-node-http@5.48.1':
     resolution: {integrity: sha512-xcaCqbhupVWhuBP1nwbk1XNvwrGljozutEiLx06mvqDf3o8cHyEgQSHS4fKJM+UAggaWVnnFW+Nne5aQ8SUJXg==}
     engines: {node: '>= 14.0.0'}
+
+  '@alloc/quick-lru@5.2.0':
+    resolution: {integrity: sha512-UrcABB+4bUrFABwbluTIBErXwvbsU/V7TZWfmbgJfbkwiBuziS9gxdODUyuiecfdGQ85jglMW6juS3+z5TsKLw==}
+    engines: {node: '>=10'}
 
   '@ampproject/remapping@2.3.0':
     resolution: {integrity: sha512-30iZtAPgz+LTIYoeivqYo853f02jBYSd5uGnGpkFV0M3xOt9aN73erkgYAmZU43x4VfqcnLxW9Kpg3R5LC4YYw==}
@@ -2009,6 +2022,9 @@ packages:
   '@oxc-project/types@0.113.0':
     resolution: {integrity: sha512-Tp3XmgxwNQ9pEN9vxgJBAqdRamHibi76iowQ38O2I4PMpcvNRQNVsU2n1x1nv9yh0XoTrGFzf7cZSGxmixxrhA==}
 
+  '@oxc-project/types@0.122.0':
+    resolution: {integrity: sha512-oLAl5kBpV4w69UtFZ9xqcmTi+GENWOcPF7FCrczTiBbmC0ibXxCwyvZGbO39rCVEuLGAZM84DH0pUIyyv/YJzA==}
+
   '@parcel/watcher-android-arm64@2.5.6':
     resolution: {integrity: sha512-YQxSS34tPF/6ZG7r/Ih9xy+kP/WwediEUsqmtf0cuCV5TPPKw/PQHRhueUo6JdeFJaqV3pyjm0GdYjZotbRt/A==}
     engines: {node: '>= 10.0.0'}
@@ -2143,16 +2159,34 @@ packages:
     resolution: {integrity: sha512-h104Kh26rR8tm+a3Qkc5S4VLYint3FE48as7+/5oCEcKR2idC/pF1G6AhIXKI+eHPJa/3J9i5z0Al47IeGHPkA==}
     engines: {node: '>=12'}
 
+  '@rolldown/binding-android-arm64@1.0.0-rc.12':
+    resolution: {integrity: sha512-pv1y2Fv0JybcykuiiD3qBOBdz6RteYojRFY1d+b95WVuzx211CRh+ytI/+9iVyWQ6koTh5dawe4S/yRfOFjgaA==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [arm64]
+    os: [android]
+
   '@rolldown/binding-android-arm64@1.0.0-rc.4':
     resolution: {integrity: sha512-vRq9f4NzvbdZavhQbjkJBx7rRebDKYR9zHfO/Wg486+I7bSecdUapzCm5cyXoK+LHokTxgSq7A5baAXUZkIz0w==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [arm64]
     os: [android]
 
+  '@rolldown/binding-darwin-arm64@1.0.0-rc.12':
+    resolution: {integrity: sha512-cFYr6zTG/3PXXF3pUO+umXxt1wkRK/0AYT8lDwuqvRC+LuKYWSAQAQZjCWDQpAH172ZV6ieYrNnFzVVcnSflAg==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [arm64]
+    os: [darwin]
+
   '@rolldown/binding-darwin-arm64@1.0.0-rc.4':
     resolution: {integrity: sha512-kFgEvkWLqt3YCgKB5re9RlIrx9bRsvyVUnaTakEpOPuLGzLpLapYxE9BufJNvPg8GjT6mB1alN4yN1NjzoeM8Q==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [arm64]
+    os: [darwin]
+
+  '@rolldown/binding-darwin-x64@1.0.0-rc.12':
+    resolution: {integrity: sha512-ZCsYknnHzeXYps0lGBz8JrF37GpE9bFVefrlmDrAQhOEi4IOIlcoU1+FwHEtyXGx2VkYAvhu7dyBf75EJQffBw==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [x64]
     os: [darwin]
 
   '@rolldown/binding-darwin-x64@1.0.0-rc.4':
@@ -2161,17 +2195,36 @@ packages:
     cpu: [x64]
     os: [darwin]
 
+  '@rolldown/binding-freebsd-x64@1.0.0-rc.12':
+    resolution: {integrity: sha512-dMLeprcVsyJsKolRXyoTH3NL6qtsT0Y2xeuEA8WQJquWFXkEC4bcu1rLZZSnZRMtAqwtrF/Ib9Ddtpa/Gkge9Q==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [x64]
+    os: [freebsd]
+
   '@rolldown/binding-freebsd-x64@1.0.0-rc.4':
     resolution: {integrity: sha512-ep3Catd6sPnHTM0P4hNEvIv5arnDvk01PfyJIJ+J3wVCG1eEaPo09tvFqdtcaTrkwQy0VWR24uz+cb4IsK53Qw==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [x64]
     os: [freebsd]
 
+  '@rolldown/binding-linux-arm-gnueabihf@1.0.0-rc.12':
+    resolution: {integrity: sha512-YqWjAgGC/9M1lz3GR1r1rP79nMgo3mQiiA+Hfo+pvKFK1fAJ1bCi0ZQVh8noOqNacuY1qIcfyVfP6HoyBRZ85Q==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [arm]
+    os: [linux]
+
   '@rolldown/binding-linux-arm-gnueabihf@1.0.0-rc.4':
     resolution: {integrity: sha512-LwA5ayKIpnsgXJEwWc3h8wPiS33NMIHd9BhsV92T8VetVAbGe2qXlJwNVDGHN5cOQ22R9uYvbrQir2AB+ntT2w==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [arm]
     os: [linux]
+
+  '@rolldown/binding-linux-arm64-gnu@1.0.0-rc.12':
+    resolution: {integrity: sha512-/I5AS4cIroLpslsmzXfwbe5OmWvSsrFuEw3mwvbQ1kDxJ822hFHIx+vsN/TAzNVyepI/j/GSzrtCIwQPeKCLIg==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [arm64]
+    os: [linux]
+    libc: [glibc]
 
   '@rolldown/binding-linux-arm64-gnu@1.0.0-rc.4':
     resolution: {integrity: sha512-AC1WsGdlV1MtGay/OQ4J9T7GRadVnpYRzTcygV1hKnypbYN20Yh4t6O1Sa2qRBMqv1etulUknqXjc3CTIsBu6A==}
@@ -2180,12 +2233,40 @@ packages:
     os: [linux]
     libc: [glibc]
 
+  '@rolldown/binding-linux-arm64-musl@1.0.0-rc.12':
+    resolution: {integrity: sha512-V6/wZztnBqlx5hJQqNWwFdxIKN0m38p8Jas+VoSfgH54HSj9tKTt1dZvG6JRHcjh6D7TvrJPWFGaY9UBVOaWPw==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [arm64]
+    os: [linux]
+    libc: [musl]
+
   '@rolldown/binding-linux-arm64-musl@1.0.0-rc.4':
     resolution: {integrity: sha512-lU+6rgXXViO61B4EudxtVMXSOfiZONR29Sys5VGSetUY7X8mg9FCKIIjcPPj8xNDeYzKl+H8F/qSKOBVFJChCQ==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [arm64]
     os: [linux]
     libc: [musl]
+
+  '@rolldown/binding-linux-ppc64-gnu@1.0.0-rc.12':
+    resolution: {integrity: sha512-AP3E9BpcUYliZCxa3w5Kwj9OtEVDYK6sVoUzy4vTOJsjPOgdaJZKFmN4oOlX0Wp0RPV2ETfmIra9x1xuayFB7g==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [ppc64]
+    os: [linux]
+    libc: [glibc]
+
+  '@rolldown/binding-linux-s390x-gnu@1.0.0-rc.12':
+    resolution: {integrity: sha512-nWwpvUSPkoFmZo0kQazZYOrT7J5DGOJ/+QHHzjvNlooDZED8oH82Yg67HvehPPLAg5fUff7TfWFHQS8IV1n3og==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [s390x]
+    os: [linux]
+    libc: [glibc]
+
+  '@rolldown/binding-linux-x64-gnu@1.0.0-rc.12':
+    resolution: {integrity: sha512-RNrafz5bcwRy+O9e6P8Z/OCAJW/A+qtBczIqVYwTs14pf4iV1/+eKEjdOUta93q2TsT/FI0XYDP3TCky38LMAg==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [x64]
+    os: [linux]
+    libc: [glibc]
 
   '@rolldown/binding-linux-x64-gnu@1.0.0-rc.4':
     resolution: {integrity: sha512-DZaN1f0PGp/bSvKhtw50pPsnln4T13ycDq1FrDWRiHmWt1JeW+UtYg9touPFf8yt993p8tS2QjybpzKNTxYEwg==}
@@ -2194,6 +2275,13 @@ packages:
     os: [linux]
     libc: [glibc]
 
+  '@rolldown/binding-linux-x64-musl@1.0.0-rc.12':
+    resolution: {integrity: sha512-Jpw/0iwoKWx3LJ2rc1yjFrj+T7iHZn2JDg1Yny1ma0luviFS4mhAIcd1LFNxK3EYu3DHWCps0ydXQ5i/rrJ2ig==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [x64]
+    os: [linux]
+    libc: [musl]
+
   '@rolldown/binding-linux-x64-musl@1.0.0-rc.4':
     resolution: {integrity: sha512-RnGxwZLN7fhMMAItnD6dZ7lvy+TI7ba+2V54UF4dhaWa/p8I/ys1E73KO6HmPmgz92ZkfD8TXS1IMV8+uhbR9g==}
     engines: {node: ^20.19.0 || >=22.12.0}
@@ -2201,16 +2289,33 @@ packages:
     os: [linux]
     libc: [musl]
 
+  '@rolldown/binding-openharmony-arm64@1.0.0-rc.12':
+    resolution: {integrity: sha512-vRugONE4yMfVn0+7lUKdKvN4D5YusEiPilaoO2sgUWpCvrncvWgPMzK00ZFFJuiPgLwgFNP5eSiUlv2tfc+lpA==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [arm64]
+    os: [openharmony]
+
   '@rolldown/binding-openharmony-arm64@1.0.0-rc.4':
     resolution: {integrity: sha512-6lcI79+X8klGiGd8yHuTgQRjuuJYNggmEml+RsyN596P23l/zf9FVmJ7K0KVKkFAeYEdg0iMUKyIxiV5vebDNQ==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [arm64]
     os: [openharmony]
 
+  '@rolldown/binding-wasm32-wasi@1.0.0-rc.12':
+    resolution: {integrity: sha512-ykGiLr/6kkiHc0XnBfmFJuCjr5ZYKKofkx+chJWDjitX+KsJuAmrzWhwyOMSHzPhzOHOy7u9HlFoa5MoAOJ/Zg==}
+    engines: {node: '>=14.0.0'}
+    cpu: [wasm32]
+
   '@rolldown/binding-wasm32-wasi@1.0.0-rc.4':
     resolution: {integrity: sha512-wz7ohsKCAIWy91blZ/1FlpPdqrsm1xpcEOQVveWoL6+aSPKL4VUcoYmmzuLTssyZxRpEwzuIxL/GDsvpjaBtOw==}
     engines: {node: '>=14.0.0'}
     cpu: [wasm32]
+
+  '@rolldown/binding-win32-arm64-msvc@1.0.0-rc.12':
+    resolution: {integrity: sha512-5eOND4duWkwx1AzCxadcOrNeighiLwMInEADT0YM7xeEOOFcovWZCq8dadXgcRHSf3Ulh1kFo/qvzoFiCLOL1Q==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [arm64]
+    os: [win32]
 
   '@rolldown/binding-win32-arm64-msvc@1.0.0-rc.4':
     resolution: {integrity: sha512-cfiMrfuWCIgsFmcVG0IPuO6qTRHvF7NuG3wngX1RZzc6dU8FuBFb+J3MIR5WrdTNozlumfgL4cvz+R4ozBCvsQ==}
@@ -2218,11 +2323,20 @@ packages:
     cpu: [arm64]
     os: [win32]
 
+  '@rolldown/binding-win32-x64-msvc@1.0.0-rc.12':
+    resolution: {integrity: sha512-PyqoipaswDLAZtot351MLhrlrh6lcZPo2LSYE+VDxbVk24LVKAGOuE4hb8xZQmrPAuEtTZW8E6D2zc5EUZX4Lw==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [x64]
+    os: [win32]
+
   '@rolldown/binding-win32-x64-msvc@1.0.0-rc.4':
     resolution: {integrity: sha512-p6UeR9y7ht82AH57qwGuFYn69S6CZ7LLKdCKy/8T3zS9VTrJei2/CGsTUV45Da4Z9Rbhc7G4gyWQ/Ioamqn09g==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [x64]
     os: [win32]
+
+  '@rolldown/pluginutils@1.0.0-rc.12':
+    resolution: {integrity: sha512-HHMwmarRKvoFsJorqYlFeFRzXZqCt2ETQlEDOb9aqssrnVBB1/+xgTGtuTrIk5vzLNX1MjMtTf7W9z3tsSbrxw==}
 
   '@rolldown/pluginutils@1.0.0-rc.4':
     resolution: {integrity: sha512-1BrrmTu0TWfOP1riA8uakjFc9bpIUGzVKETsOtzY39pPga8zELGDl8eu1Dx7/gjM5CAz14UknsUMpBO8L+YntQ==}
@@ -2491,6 +2605,98 @@ packages:
   '@standard-schema/spec@1.1.0':
     resolution: {integrity: sha512-l2aFy5jALhniG5HgqrD6jXLi/rUWrKvqN/qJx6yoJsgKhblVd+iqqU4RCXavm/jPityDo5TCvKMnpjKnOriy0w==}
 
+  '@tailwindcss/node@4.2.2':
+    resolution: {integrity: sha512-pXS+wJ2gZpVXqFaUEjojq7jzMpTGf8rU6ipJz5ovJV6PUGmlJ+jvIwGrzdHdQ80Sg+wmQxUFuoW1UAAwHNEdFA==}
+
+  '@tailwindcss/oxide-android-arm64@4.2.2':
+    resolution: {integrity: sha512-dXGR1n+P3B6748jZO/SvHZq7qBOqqzQ+yFrXpoOWWALWndF9MoSKAT3Q0fYgAzYzGhxNYOoysRvYlpixRBBoDg==}
+    engines: {node: '>= 20'}
+    cpu: [arm64]
+    os: [android]
+
+  '@tailwindcss/oxide-darwin-arm64@4.2.2':
+    resolution: {integrity: sha512-iq9Qjr6knfMpZHj55/37ouZeykwbDqF21gPFtfnhCCKGDcPI/21FKC9XdMO/XyBM7qKORx6UIhGgg6jLl7BZlg==}
+    engines: {node: '>= 20'}
+    cpu: [arm64]
+    os: [darwin]
+
+  '@tailwindcss/oxide-darwin-x64@4.2.2':
+    resolution: {integrity: sha512-BlR+2c3nzc8f2G639LpL89YY4bdcIdUmiOOkv2GQv4/4M0vJlpXEa0JXNHhCHU7VWOKWT/CjqHdTP8aUuDJkuw==}
+    engines: {node: '>= 20'}
+    cpu: [x64]
+    os: [darwin]
+
+  '@tailwindcss/oxide-freebsd-x64@4.2.2':
+    resolution: {integrity: sha512-YUqUgrGMSu2CDO82hzlQ5qSb5xmx3RUrke/QgnoEx7KvmRJHQuZHZmZTLSuuHwFf0DJPybFMXMYf+WJdxHy/nQ==}
+    engines: {node: '>= 20'}
+    cpu: [x64]
+    os: [freebsd]
+
+  '@tailwindcss/oxide-linux-arm-gnueabihf@4.2.2':
+    resolution: {integrity: sha512-FPdhvsW6g06T9BWT0qTwiVZYE2WIFo2dY5aCSpjG/S/u1tby+wXoslXS0kl3/KXnULlLr1E3NPRRw0g7t2kgaQ==}
+    engines: {node: '>= 20'}
+    cpu: [arm]
+    os: [linux]
+
+  '@tailwindcss/oxide-linux-arm64-gnu@4.2.2':
+    resolution: {integrity: sha512-4og1V+ftEPXGttOO7eCmW7VICmzzJWgMx+QXAJRAhjrSjumCwWqMfkDrNu1LXEQzNAwz28NCUpucgQPrR4S2yw==}
+    engines: {node: '>= 20'}
+    cpu: [arm64]
+    os: [linux]
+    libc: [glibc]
+
+  '@tailwindcss/oxide-linux-arm64-musl@4.2.2':
+    resolution: {integrity: sha512-oCfG/mS+/+XRlwNjnsNLVwnMWYH7tn/kYPsNPh+JSOMlnt93mYNCKHYzylRhI51X+TbR+ufNhhKKzm6QkqX8ag==}
+    engines: {node: '>= 20'}
+    cpu: [arm64]
+    os: [linux]
+    libc: [musl]
+
+  '@tailwindcss/oxide-linux-x64-gnu@4.2.2':
+    resolution: {integrity: sha512-rTAGAkDgqbXHNp/xW0iugLVmX62wOp2PoE39BTCGKjv3Iocf6AFbRP/wZT/kuCxC9QBh9Pu8XPkv/zCZB2mcMg==}
+    engines: {node: '>= 20'}
+    cpu: [x64]
+    os: [linux]
+    libc: [glibc]
+
+  '@tailwindcss/oxide-linux-x64-musl@4.2.2':
+    resolution: {integrity: sha512-XW3t3qwbIwiSyRCggeO2zxe3KWaEbM0/kW9e8+0XpBgyKU4ATYzcVSMKteZJ1iukJ3HgHBjbg9P5YPRCVUxlnQ==}
+    engines: {node: '>= 20'}
+    cpu: [x64]
+    os: [linux]
+    libc: [musl]
+
+  '@tailwindcss/oxide-wasm32-wasi@4.2.2':
+    resolution: {integrity: sha512-eKSztKsmEsn1O5lJ4ZAfyn41NfG7vzCg496YiGtMDV86jz1q/irhms5O0VrY6ZwTUkFy/EKG3RfWgxSI3VbZ8Q==}
+    engines: {node: '>=14.0.0'}
+    cpu: [wasm32]
+    bundledDependencies:
+      - '@napi-rs/wasm-runtime'
+      - '@emnapi/core'
+      - '@emnapi/runtime'
+      - '@tybys/wasm-util'
+      - '@emnapi/wasi-threads'
+      - tslib
+
+  '@tailwindcss/oxide-win32-arm64-msvc@4.2.2':
+    resolution: {integrity: sha512-qPmaQM4iKu5mxpsrWZMOZRgZv1tOZpUm+zdhhQP0VhJfyGGO3aUKdbh3gDZc/dPLQwW4eSqWGrrcWNBZWUWaXQ==}
+    engines: {node: '>= 20'}
+    cpu: [arm64]
+    os: [win32]
+
+  '@tailwindcss/oxide-win32-x64-msvc@4.2.2':
+    resolution: {integrity: sha512-1T/37VvI7WyH66b+vqHj/cLwnCxt7Qt3WFu5Q8hk65aOvlwAhs7rAp1VkulBJw/N4tMirXjVnylTR72uI0HGcA==}
+    engines: {node: '>= 20'}
+    cpu: [x64]
+    os: [win32]
+
+  '@tailwindcss/oxide@4.2.2':
+    resolution: {integrity: sha512-qEUA07+E5kehxYp9BVMpq9E8vnJuBHfJEC0vPC5e7iL/hw7HR61aDKoVoKzrG+QKp56vhNZe4qwkRmMC0zDLvg==}
+    engines: {node: '>= 20'}
+
+  '@tailwindcss/postcss@4.2.2':
+    resolution: {integrity: sha512-n4goKQbW8RVXIbNKRB/45LzyUqN451deQK0nzIeauVEqjlI49slUlgKYJM2QyUzap/PcpnS7kzSUmPb1sCRvYQ==}
+
   '@tanstack/query-core@5.90.16':
     resolution: {integrity: sha512-MvtWckSVufs/ja463/K4PyJeqT+HMlJWtw6PrCpywznd2NSgO3m4KwO9RqbFqGg6iDE8vVMFWMeQI4Io3eEYww==}
 
@@ -2646,7 +2852,7 @@ packages:
     resolution: {integrity: sha512-HXciTXN/sDBYWgeAD4V4s0DN0g72x5mlxQhHxtYu3Tt8BLa6MzcJZUyDVFCdtjNs3bfENVHVzOsmooTVuNgAAw==}
     engines: {node: ^18.0.0 || ^20.0.0 || >=22.0.0}
     peerDependencies:
-      vite: ^6.0.0 || ^7.0.0
+      vite: '>=7.3.2'
 
   '@webassemblyjs/ast@1.14.1':
     resolution: {integrity: sha512-nuBEDgQfm1ccRp/8bCQrx1frohyufl4JlbMMZ4P1wpeOfDhF6FQkxZJ1b/e+PLwr6X1Nhw6OLme5usuBWYBvuQ==}
@@ -4298,6 +4504,80 @@ packages:
       webpack:
         optional: true
 
+  lightningcss-android-arm64@1.32.0:
+    resolution: {integrity: sha512-YK7/ClTt4kAK0vo6w3X+Pnm0D2cf2vPHbhOXdoNti1Ga0al1P4TBZhwjATvjNwLEBCnKvjJc2jQgHXH0NEwlAg==}
+    engines: {node: '>= 12.0.0'}
+    cpu: [arm64]
+    os: [android]
+
+  lightningcss-darwin-arm64@1.32.0:
+    resolution: {integrity: sha512-RzeG9Ju5bag2Bv1/lwlVJvBE3q6TtXskdZLLCyfg5pt+HLz9BqlICO7LZM7VHNTTn/5PRhHFBSjk5lc4cmscPQ==}
+    engines: {node: '>= 12.0.0'}
+    cpu: [arm64]
+    os: [darwin]
+
+  lightningcss-darwin-x64@1.32.0:
+    resolution: {integrity: sha512-U+QsBp2m/s2wqpUYT/6wnlagdZbtZdndSmut/NJqlCcMLTWp5muCrID+K5UJ6jqD2BFshejCYXniPDbNh73V8w==}
+    engines: {node: '>= 12.0.0'}
+    cpu: [x64]
+    os: [darwin]
+
+  lightningcss-freebsd-x64@1.32.0:
+    resolution: {integrity: sha512-JCTigedEksZk3tHTTthnMdVfGf61Fky8Ji2E4YjUTEQX14xiy/lTzXnu1vwiZe3bYe0q+SpsSH/CTeDXK6WHig==}
+    engines: {node: '>= 12.0.0'}
+    cpu: [x64]
+    os: [freebsd]
+
+  lightningcss-linux-arm-gnueabihf@1.32.0:
+    resolution: {integrity: sha512-x6rnnpRa2GL0zQOkt6rts3YDPzduLpWvwAF6EMhXFVZXD4tPrBkEFqzGowzCsIWsPjqSK+tyNEODUBXeeVHSkw==}
+    engines: {node: '>= 12.0.0'}
+    cpu: [arm]
+    os: [linux]
+
+  lightningcss-linux-arm64-gnu@1.32.0:
+    resolution: {integrity: sha512-0nnMyoyOLRJXfbMOilaSRcLH3Jw5z9HDNGfT/gwCPgaDjnx0i8w7vBzFLFR1f6CMLKF8gVbebmkUN3fa/kQJpQ==}
+    engines: {node: '>= 12.0.0'}
+    cpu: [arm64]
+    os: [linux]
+    libc: [glibc]
+
+  lightningcss-linux-arm64-musl@1.32.0:
+    resolution: {integrity: sha512-UpQkoenr4UJEzgVIYpI80lDFvRmPVg6oqboNHfoH4CQIfNA+HOrZ7Mo7KZP02dC6LjghPQJeBsvXhJod/wnIBg==}
+    engines: {node: '>= 12.0.0'}
+    cpu: [arm64]
+    os: [linux]
+    libc: [musl]
+
+  lightningcss-linux-x64-gnu@1.32.0:
+    resolution: {integrity: sha512-V7Qr52IhZmdKPVr+Vtw8o+WLsQJYCTd8loIfpDaMRWGUZfBOYEJeyJIkqGIDMZPwPx24pUMfwSxxI8phr/MbOA==}
+    engines: {node: '>= 12.0.0'}
+    cpu: [x64]
+    os: [linux]
+    libc: [glibc]
+
+  lightningcss-linux-x64-musl@1.32.0:
+    resolution: {integrity: sha512-bYcLp+Vb0awsiXg/80uCRezCYHNg1/l3mt0gzHnWV9XP1W5sKa5/TCdGWaR/zBM2PeF/HbsQv/j2URNOiVuxWg==}
+    engines: {node: '>= 12.0.0'}
+    cpu: [x64]
+    os: [linux]
+    libc: [musl]
+
+  lightningcss-win32-arm64-msvc@1.32.0:
+    resolution: {integrity: sha512-8SbC8BR40pS6baCM8sbtYDSwEVQd4JlFTOlaD3gWGHfThTcABnNDBda6eTZeqbofalIJhFx0qKzgHJmcPTnGdw==}
+    engines: {node: '>= 12.0.0'}
+    cpu: [arm64]
+    os: [win32]
+
+  lightningcss-win32-x64-msvc@1.32.0:
+    resolution: {integrity: sha512-Amq9B/SoZYdDi1kFrojnoqPLxYhQ4Wo5XiL8EVJrVsB8ARoC1PWW6VGtT0WKCemjy8aC+louJnjS7U18x3b06Q==}
+    engines: {node: '>= 12.0.0'}
+    cpu: [x64]
+    os: [win32]
+
+  lightningcss@1.32.0:
+    resolution: {integrity: sha512-NXYBzinNrblfraPGyrbPoD19C1h9lfI/1mzgWYvXUTe414Gz/X1FD2XBZSZM7rRTrMA8JL3OtAaGifrIKhQ5yQ==}
+    engines: {node: '>= 12.0.0'}
+
   lines-and-columns@1.2.4:
     resolution: {integrity: sha512-7ylylesZQ/PV29jhEDl3Ufjo6ZX7gCqJr5F7PKrqc93v7fzSymt1BpwEU8nAUXs8qzzvqhbjhK5QZg6Mt/HkBg==}
 
@@ -5276,6 +5556,11 @@ packages:
     deprecated: Rimraf versions prior to v4 are no longer supported
     hasBin: true
 
+  rolldown@1.0.0-rc.12:
+    resolution: {integrity: sha512-yP4USLIMYrwpPHEFB5JGH1uxhcslv6/hL0OyvTuY+3qlOSJvZ7ntYnoWpehBxufkgN0cvXxppuTu5hHa/zPh+A==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    hasBin: true
+
   rolldown@1.0.0-rc.4:
     resolution: {integrity: sha512-V2tPDUrY3WSevrvU2E41ijZlpF+5PbZu4giH+VpNraaadsJGHa4fR6IFwsocVwEXDoAdIv5qgPPxgrvKAOIPtA==}
     engines: {node: ^20.19.0 || >=22.12.0}
@@ -5650,6 +5935,9 @@ packages:
     resolution: {integrity: sha512-yEFYrVhod+hdNyx7g5Bnkkb0G6si8HJurOoOEgC8B/O0uXLHlaey/65KRv6cuWBNhBgHKAROVpc7QyYqE5gFng==}
     engines: {node: '>=20'}
 
+  tailwindcss@4.2.2:
+    resolution: {integrity: sha512-KWBIxs1Xb6NoLdMVqhbhgwZf2PGBpPEiwOqgI4pFIYbNTfBXiKYyWoTsXgBQ9WFg/OlhnvHaY+AEpW7wSmFo2Q==}
+
   tapable@2.3.2:
     resolution: {integrity: sha512-1MOpMXuhGzGL5TTCZFItxCc0AARf1EZFQkGqMm7ERKj8+Hgr5oLvJOVFcC+lRmR8hCe2S3jC4T5D7Vg/d7/fhA==}
     engines: {node: '>=6'}
@@ -5917,15 +6205,16 @@ packages:
     resolution: {integrity: sha512-BNGbWLfd0eUPabhkXUVm0j8uuvREyTh5ovRa/dyow/BqAbZJyC+5fU+IzQOzmAKzYqYRAISoRhdQr3eIZ/PXqg==}
     engines: {node: '>= 0.8'}
 
-  vite@7.3.1:
-    resolution: {integrity: sha512-w+N7Hifpc3gRjZ63vYBXA56dvvRlNWRczTdmCBBa+CotUzAPf5b7YMdMR/8CQoeYE5LX3W4wj6RYTgonm1b9DA==}
+  vite@8.0.5:
+    resolution: {integrity: sha512-nmu43Qvq9UopTRfMx2jOYW5l16pb3iDC1JH6yMuPkpVbzK0k+L7dfsEDH4jRgYFmsg0sTAqkojoZgzLMlwHsCQ==}
     engines: {node: ^20.19.0 || >=22.12.0}
     hasBin: true
     peerDependencies:
       '@types/node': ^20.19.0 || >=22.12.0
+      '@vitejs/devtools': ^0.1.0
+      esbuild: ^0.27.0 || ^0.28.0
       jiti: '>=1.21.0'
       less: ^4.0.0
-      lightningcss: ^1.21.0
       sass: ^1.70.0
       sass-embedded: ^1.70.0
       stylus: '>=0.54.8'
@@ -5936,11 +6225,13 @@ packages:
     peerDependenciesMeta:
       '@types/node':
         optional: true
+      '@vitejs/devtools':
+        optional: true
+      esbuild:
+        optional: true
       jiti:
         optional: true
       less:
-        optional: true
-      lightningcss:
         optional: true
       sass:
         optional: true
@@ -6266,6 +6557,8 @@ snapshots:
     dependencies:
       '@algolia/client-common': 5.48.1
 
+  '@alloc/quick-lru@5.2.0': {}
+
   '@ampproject/remapping@2.3.0':
     dependencies:
       '@jridgewell/gen-mapping': 0.3.13
@@ -6278,13 +6571,13 @@ snapshots:
     transitivePeerDependencies:
       - chokidar
 
-  '@angular-devkit/build-angular@21.2.6(@angular/compiler-cli@21.2.7(@angular/compiler@21.2.7)(typescript@5.9.3))(@angular/compiler@21.2.7)(@angular/core@21.2.7(@angular/compiler@21.2.7)(rxjs@7.8.2)(zone.js@0.16.1))(@angular/platform-browser@21.2.7(@angular/animations@21.2.7(@angular/core@21.2.7(@angular/compiler@21.2.7)(rxjs@7.8.2)(zone.js@0.16.1)))(@angular/common@21.2.7(@angular/core@21.2.7(@angular/compiler@21.2.7)(rxjs@7.8.2)(zone.js@0.16.1))(rxjs@7.8.2))(@angular/core@21.2.7(@angular/compiler@21.2.7)(rxjs@7.8.2)(zone.js@0.16.1)))(@emnapi/core@1.9.2)(@emnapi/runtime@1.9.2)(@types/node@25.5.2)(chokidar@5.0.0)(jiti@2.6.1)(karma@6.4.4)(ng-packagr@21.2.2(@angular/compiler-cli@21.2.7(@angular/compiler@21.2.7)(typescript@5.9.3))(tslib@2.8.1)(typescript@5.9.3))(typescript@5.9.3)':
+  '@angular-devkit/build-angular@21.2.6(@angular/compiler-cli@21.2.7(@angular/compiler@21.2.7)(typescript@5.9.3))(@angular/compiler@21.2.7)(@angular/core@21.2.7(@angular/compiler@21.2.7)(rxjs@7.8.2)(zone.js@0.16.1))(@angular/platform-browser@21.2.7(@angular/animations@21.2.7(@angular/core@21.2.7(@angular/compiler@21.2.7)(rxjs@7.8.2)(zone.js@0.16.1)))(@angular/common@21.2.7(@angular/core@21.2.7(@angular/compiler@21.2.7)(rxjs@7.8.2)(zone.js@0.16.1))(rxjs@7.8.2))(@angular/core@21.2.7(@angular/compiler@21.2.7)(rxjs@7.8.2)(zone.js@0.16.1)))(@emnapi/core@1.9.2)(@emnapi/runtime@1.9.2)(@types/node@25.5.2)(chokidar@5.0.0)(jiti@2.6.1)(karma@6.4.4)(ng-packagr@21.2.2(@angular/compiler-cli@21.2.7(@angular/compiler@21.2.7)(typescript@5.9.3))(tailwindcss@4.2.2)(tslib@2.8.1)(typescript@5.9.3))(tailwindcss@4.2.2)(typescript@5.9.3)':
     dependencies:
       '@ampproject/remapping': 2.3.0
       '@angular-devkit/architect': 0.2102.6(chokidar@5.0.0)
-      '@angular-devkit/build-webpack': 0.2102.6(chokidar@5.0.0)(webpack-dev-server@5.2.3(tslib@2.8.1)(webpack@5.105.2))(webpack@5.105.2(esbuild@0.27.3))
+      '@angular-devkit/build-webpack': 0.2102.6(chokidar@5.0.0)(webpack-dev-server@5.2.3(tslib@2.8.1)(webpack@5.105.2(esbuild@0.27.3)))(webpack@5.105.2(esbuild@0.27.3))
       '@angular-devkit/core': 21.2.6(chokidar@5.0.0)
-      '@angular/build': 21.2.6(@angular/compiler-cli@21.2.7(@angular/compiler@21.2.7)(typescript@5.9.3))(@angular/compiler@21.2.7)(@angular/core@21.2.7(@angular/compiler@21.2.7)(rxjs@7.8.2)(zone.js@0.16.1))(@angular/platform-browser@21.2.7(@angular/animations@21.2.7(@angular/core@21.2.7(@angular/compiler@21.2.7)(rxjs@7.8.2)(zone.js@0.16.1)))(@angular/common@21.2.7(@angular/core@21.2.7(@angular/compiler@21.2.7)(rxjs@7.8.2)(zone.js@0.16.1))(rxjs@7.8.2))(@angular/core@21.2.7(@angular/compiler@21.2.7)(rxjs@7.8.2)(zone.js@0.16.1)))(@emnapi/core@1.9.2)(@emnapi/runtime@1.9.2)(@types/node@25.5.2)(chokidar@5.0.0)(jiti@2.6.1)(karma@6.4.4)(less@4.4.2)(ng-packagr@21.2.2(@angular/compiler-cli@21.2.7(@angular/compiler@21.2.7)(typescript@5.9.3))(tslib@2.8.1)(typescript@5.9.3))(postcss@8.5.6)(terser@5.46.0)(tslib@2.8.1)(typescript@5.9.3)
+      '@angular/build': 21.2.6(@angular/compiler-cli@21.2.7(@angular/compiler@21.2.7)(typescript@5.9.3))(@angular/compiler@21.2.7)(@angular/core@21.2.7(@angular/compiler@21.2.7)(rxjs@7.8.2)(zone.js@0.16.1))(@angular/platform-browser@21.2.7(@angular/animations@21.2.7(@angular/core@21.2.7(@angular/compiler@21.2.7)(rxjs@7.8.2)(zone.js@0.16.1)))(@angular/common@21.2.7(@angular/core@21.2.7(@angular/compiler@21.2.7)(rxjs@7.8.2)(zone.js@0.16.1))(rxjs@7.8.2))(@angular/core@21.2.7(@angular/compiler@21.2.7)(rxjs@7.8.2)(zone.js@0.16.1)))(@emnapi/core@1.9.2)(@emnapi/runtime@1.9.2)(@types/node@25.5.2)(chokidar@5.0.0)(jiti@2.6.1)(karma@6.4.4)(less@4.4.2)(ng-packagr@21.2.2(@angular/compiler-cli@21.2.7(@angular/compiler@21.2.7)(typescript@5.9.3))(tailwindcss@4.2.2)(tslib@2.8.1)(typescript@5.9.3))(postcss@8.5.6)(tailwindcss@4.2.2)(terser@5.46.0)(tslib@2.8.1)(typescript@5.9.3)
       '@angular/compiler-cli': 21.2.7(@angular/compiler@21.2.7)(typescript@5.9.3)
       '@babel/core': 7.29.0
       '@babel/generator': 7.29.1
@@ -6332,8 +6625,8 @@ snapshots:
       tslib: 2.8.1
       typescript: 5.9.3
       webpack: 5.105.2(esbuild@0.27.3)
-      webpack-dev-middleware: 7.4.5(tslib@2.8.1)(webpack@5.105.2)
-      webpack-dev-server: 5.2.3(tslib@2.8.1)(webpack@5.105.2)
+      webpack-dev-middleware: 7.4.5(tslib@2.8.1)(webpack@5.105.2(esbuild@0.27.3))
+      webpack-dev-server: 5.2.3(tslib@2.8.1)(webpack@5.105.2(esbuild@0.27.3))
       webpack-merge: 6.0.1
       webpack-subresource-integrity: 5.1.0(webpack@5.105.2(esbuild@0.27.3))
     optionalDependencies:
@@ -6341,7 +6634,8 @@ snapshots:
       '@angular/platform-browser': 21.2.7(@angular/animations@21.2.7(@angular/core@21.2.7(@angular/compiler@21.2.7)(rxjs@7.8.2)(zone.js@0.16.1)))(@angular/common@21.2.7(@angular/core@21.2.7(@angular/compiler@21.2.7)(rxjs@7.8.2)(zone.js@0.16.1))(rxjs@7.8.2))(@angular/core@21.2.7(@angular/compiler@21.2.7)(rxjs@7.8.2)(zone.js@0.16.1))
       esbuild: 0.27.3
       karma: 6.4.4
-      ng-packagr: 21.2.2(@angular/compiler-cli@21.2.7(@angular/compiler@21.2.7)(typescript@5.9.3))(tslib@2.8.1)(typescript@5.9.3)
+      ng-packagr: 21.2.2(@angular/compiler-cli@21.2.7(@angular/compiler@21.2.7)(typescript@5.9.3))(tailwindcss@4.2.2)(tslib@2.8.1)(typescript@5.9.3)
+      tailwindcss: 4.2.2
     transitivePeerDependencies:
       - '@angular/compiler'
       - '@emnapi/core'
@@ -6349,12 +6643,12 @@ snapshots:
       - '@rspack/core'
       - '@swc/core'
       - '@types/node'
+      - '@vitejs/devtools'
       - bufferutil
       - chokidar
       - debug
       - html-webpack-plugin
       - jiti
-      - lightningcss
       - node-sass
       - sass-embedded
       - stylus
@@ -6367,12 +6661,12 @@ snapshots:
       - webpack-cli
       - yaml
 
-  '@angular-devkit/build-webpack@0.2102.6(chokidar@5.0.0)(webpack-dev-server@5.2.3(tslib@2.8.1)(webpack@5.105.2))(webpack@5.105.2(esbuild@0.27.3))':
+  '@angular-devkit/build-webpack@0.2102.6(chokidar@5.0.0)(webpack-dev-server@5.2.3(tslib@2.8.1)(webpack@5.105.2(esbuild@0.27.3)))(webpack@5.105.2(esbuild@0.27.3))':
     dependencies:
       '@angular-devkit/architect': 0.2102.6(chokidar@5.0.0)
       rxjs: 7.8.2
       webpack: 5.105.2(esbuild@0.27.3)
-      webpack-dev-server: 5.2.3(tslib@2.8.1)(webpack@5.105.2)
+      webpack-dev-server: 5.2.3(tslib@2.8.1)(webpack@5.105.2(esbuild@0.27.3))
     transitivePeerDependencies:
       - chokidar
 
@@ -6467,7 +6761,7 @@ snapshots:
       '@angular/core': 21.2.7(@angular/compiler@21.2.7)(rxjs@7.8.2)(zone.js@0.16.1)
       tslib: 2.8.1
 
-  '@angular/build@21.2.6(@angular/compiler-cli@21.2.7(@angular/compiler@21.2.7)(typescript@5.9.3))(@angular/compiler@21.2.7)(@angular/core@21.2.7(@angular/compiler@21.2.7)(rxjs@7.8.2)(zone.js@0.16.1))(@angular/platform-browser@21.2.7(@angular/animations@21.2.7(@angular/core@21.2.7(@angular/compiler@21.2.7)(rxjs@7.8.2)(zone.js@0.16.1)))(@angular/common@21.2.7(@angular/core@21.2.7(@angular/compiler@21.2.7)(rxjs@7.8.2)(zone.js@0.16.1))(rxjs@7.8.2))(@angular/core@21.2.7(@angular/compiler@21.2.7)(rxjs@7.8.2)(zone.js@0.16.1)))(@emnapi/core@1.9.2)(@emnapi/runtime@1.9.2)(@types/node@25.5.2)(chokidar@5.0.0)(jiti@2.6.1)(karma@6.4.4)(less@4.4.2)(ng-packagr@21.2.2(@angular/compiler-cli@21.2.7(@angular/compiler@21.2.7)(typescript@5.9.3))(tslib@2.8.1)(typescript@5.9.3))(postcss@8.5.6)(terser@5.46.0)(tslib@2.8.1)(typescript@5.9.3)':
+  '@angular/build@21.2.6(@angular/compiler-cli@21.2.7(@angular/compiler@21.2.7)(typescript@5.9.3))(@angular/compiler@21.2.7)(@angular/core@21.2.7(@angular/compiler@21.2.7)(rxjs@7.8.2)(zone.js@0.16.1))(@angular/platform-browser@21.2.7(@angular/animations@21.2.7(@angular/core@21.2.7(@angular/compiler@21.2.7)(rxjs@7.8.2)(zone.js@0.16.1)))(@angular/common@21.2.7(@angular/core@21.2.7(@angular/compiler@21.2.7)(rxjs@7.8.2)(zone.js@0.16.1))(rxjs@7.8.2))(@angular/core@21.2.7(@angular/compiler@21.2.7)(rxjs@7.8.2)(zone.js@0.16.1)))(@emnapi/core@1.9.2)(@emnapi/runtime@1.9.2)(@types/node@25.5.2)(chokidar@5.0.0)(jiti@2.6.1)(karma@6.4.4)(less@4.4.2)(ng-packagr@21.2.2(@angular/compiler-cli@21.2.7(@angular/compiler@21.2.7)(typescript@5.9.3))(tailwindcss@4.2.2)(tslib@2.8.1)(typescript@5.9.3))(postcss@8.5.6)(tailwindcss@4.2.2)(terser@5.46.0)(tslib@2.8.1)(typescript@5.9.3)':
     dependencies:
       '@ampproject/remapping': 2.3.0
       '@angular-devkit/architect': 0.2102.6(chokidar@5.0.0)
@@ -6477,7 +6771,7 @@ snapshots:
       '@babel/helper-annotate-as-pure': 7.27.3
       '@babel/helper-split-export-declaration': 7.24.7
       '@inquirer/confirm': 5.1.21(@types/node@25.5.2)
-      '@vitejs/plugin-basic-ssl': 2.1.4(vite@7.3.1(@types/node@25.5.2)(jiti@2.6.1)(less@4.4.2)(sass@1.97.3)(terser@5.46.0))
+      '@vitejs/plugin-basic-ssl': 2.1.4(vite@8.0.5(@emnapi/core@1.9.2)(@emnapi/runtime@1.9.2)(@types/node@25.5.2)(esbuild@0.27.3)(jiti@2.6.1)(less@4.4.2)(sass@1.97.3)(terser@5.46.0))
       beasties: 0.4.1
       browserslist: 4.28.2
       esbuild: 0.27.3
@@ -6498,7 +6792,7 @@ snapshots:
       tslib: 2.8.1
       typescript: 5.9.3
       undici: 7.24.4
-      vite: 7.3.1(@types/node@25.5.2)(jiti@2.6.1)(less@4.4.2)(sass@1.97.3)(terser@5.46.0)
+      vite: 8.0.5(@emnapi/core@1.9.2)(@emnapi/runtime@1.9.2)(@types/node@25.5.2)(esbuild@0.27.3)(jiti@2.6.1)(less@4.4.2)(sass@1.97.3)(terser@5.46.0)
       watchpack: 2.5.1
     optionalDependencies:
       '@angular/core': 21.2.7(@angular/compiler@21.2.7)(rxjs@7.8.2)(zone.js@0.16.1)
@@ -6506,15 +6800,16 @@ snapshots:
       karma: 6.4.4
       less: 4.4.2
       lmdb: 3.5.1
-      ng-packagr: 21.2.2(@angular/compiler-cli@21.2.7(@angular/compiler@21.2.7)(typescript@5.9.3))(tslib@2.8.1)(typescript@5.9.3)
+      ng-packagr: 21.2.2(@angular/compiler-cli@21.2.7(@angular/compiler@21.2.7)(typescript@5.9.3))(tailwindcss@4.2.2)(tslib@2.8.1)(typescript@5.9.3)
       postcss: 8.5.6
+      tailwindcss: 4.2.2
     transitivePeerDependencies:
       - '@emnapi/core'
       - '@emnapi/runtime'
       - '@types/node'
+      - '@vitejs/devtools'
       - chokidar
       - jiti
-      - lightningcss
       - sass-embedded
       - stylus
       - sugarss
@@ -6523,7 +6818,7 @@ snapshots:
       - tsx
       - yaml
 
-  '@angular/build@21.2.6(@angular/compiler-cli@21.2.7(@angular/compiler@21.2.7)(typescript@5.9.3))(@angular/compiler@21.2.7)(@angular/core@21.2.7(@angular/compiler@21.2.7)(rxjs@7.8.2)(zone.js@0.16.1))(@angular/platform-browser@21.2.7(@angular/animations@21.2.7(@angular/core@21.2.7(@angular/compiler@21.2.7)(rxjs@7.8.2)(zone.js@0.16.1)))(@angular/common@21.2.7(@angular/core@21.2.7(@angular/compiler@21.2.7)(rxjs@7.8.2)(zone.js@0.16.1))(rxjs@7.8.2))(@angular/core@21.2.7(@angular/compiler@21.2.7)(rxjs@7.8.2)(zone.js@0.16.1)))(@emnapi/core@1.9.2)(@emnapi/runtime@1.9.2)(@types/node@25.5.2)(chokidar@5.0.0)(jiti@2.6.1)(karma@6.4.4)(less@4.4.2)(ng-packagr@21.2.2(@angular/compiler-cli@21.2.7(@angular/compiler@21.2.7)(typescript@5.9.3))(tslib@2.8.1)(typescript@5.9.3))(postcss@8.5.8)(terser@5.46.0)(tslib@2.8.1)(typescript@5.9.3)':
+  '@angular/build@21.2.6(@angular/compiler-cli@21.2.7(@angular/compiler@21.2.7)(typescript@5.9.3))(@angular/compiler@21.2.7)(@angular/core@21.2.7(@angular/compiler@21.2.7)(rxjs@7.8.2)(zone.js@0.16.1))(@angular/platform-browser@21.2.7(@angular/animations@21.2.7(@angular/core@21.2.7(@angular/compiler@21.2.7)(rxjs@7.8.2)(zone.js@0.16.1)))(@angular/common@21.2.7(@angular/core@21.2.7(@angular/compiler@21.2.7)(rxjs@7.8.2)(zone.js@0.16.1))(rxjs@7.8.2))(@angular/core@21.2.7(@angular/compiler@21.2.7)(rxjs@7.8.2)(zone.js@0.16.1)))(@emnapi/core@1.9.2)(@emnapi/runtime@1.9.2)(@types/node@25.5.2)(chokidar@5.0.0)(jiti@2.6.1)(karma@6.4.4)(less@4.4.2)(ng-packagr@21.2.2(@angular/compiler-cli@21.2.7(@angular/compiler@21.2.7)(typescript@5.9.3))(tailwindcss@4.2.2)(tslib@2.8.1)(typescript@5.9.3))(postcss@8.5.8)(tailwindcss@4.2.2)(terser@5.46.0)(tslib@2.8.1)(typescript@5.9.3)':
     dependencies:
       '@ampproject/remapping': 2.3.0
       '@angular-devkit/architect': 0.2102.6(chokidar@5.0.0)
@@ -6533,7 +6828,7 @@ snapshots:
       '@babel/helper-annotate-as-pure': 7.27.3
       '@babel/helper-split-export-declaration': 7.24.7
       '@inquirer/confirm': 5.1.21(@types/node@25.5.2)
-      '@vitejs/plugin-basic-ssl': 2.1.4(vite@7.3.1(@types/node@25.5.2)(jiti@2.6.1)(less@4.4.2)(sass@1.97.3)(terser@5.46.0))
+      '@vitejs/plugin-basic-ssl': 2.1.4(vite@8.0.5(@emnapi/core@1.9.2)(@emnapi/runtime@1.9.2)(@types/node@25.5.2)(esbuild@0.27.3)(jiti@2.6.1)(less@4.4.2)(sass@1.97.3)(terser@5.46.0))
       beasties: 0.4.1
       browserslist: 4.28.2
       esbuild: 0.27.3
@@ -6554,7 +6849,7 @@ snapshots:
       tslib: 2.8.1
       typescript: 5.9.3
       undici: 7.24.4
-      vite: 7.3.1(@types/node@25.5.2)(jiti@2.6.1)(less@4.4.2)(sass@1.97.3)(terser@5.46.0)
+      vite: 8.0.5(@emnapi/core@1.9.2)(@emnapi/runtime@1.9.2)(@types/node@25.5.2)(esbuild@0.27.3)(jiti@2.6.1)(less@4.4.2)(sass@1.97.3)(terser@5.46.0)
       watchpack: 2.5.1
     optionalDependencies:
       '@angular/core': 21.2.7(@angular/compiler@21.2.7)(rxjs@7.8.2)(zone.js@0.16.1)
@@ -6562,15 +6857,16 @@ snapshots:
       karma: 6.4.4
       less: 4.4.2
       lmdb: 3.5.1
-      ng-packagr: 21.2.2(@angular/compiler-cli@21.2.7(@angular/compiler@21.2.7)(typescript@5.9.3))(tslib@2.8.1)(typescript@5.9.3)
+      ng-packagr: 21.2.2(@angular/compiler-cli@21.2.7(@angular/compiler@21.2.7)(typescript@5.9.3))(tailwindcss@4.2.2)(tslib@2.8.1)(typescript@5.9.3)
       postcss: 8.5.8
+      tailwindcss: 4.2.2
     transitivePeerDependencies:
       - '@emnapi/core'
       - '@emnapi/runtime'
       - '@types/node'
+      - '@vitejs/devtools'
       - chokidar
       - jiti
-      - lightningcss
       - sass-embedded
       - stylus
       - sugarss
@@ -8264,6 +8560,8 @@ snapshots:
 
   '@oxc-project/types@0.113.0': {}
 
+  '@oxc-project/types@0.122.0': {}
+
   '@parcel/watcher-android-arm64@2.5.6':
     optional: true
 
@@ -8427,34 +8725,78 @@ snapshots:
       '@pnpm/network.ca-file': 1.0.2
       config-chain: 1.1.13
 
+  '@rolldown/binding-android-arm64@1.0.0-rc.12':
+    optional: true
+
   '@rolldown/binding-android-arm64@1.0.0-rc.4':
+    optional: true
+
+  '@rolldown/binding-darwin-arm64@1.0.0-rc.12':
     optional: true
 
   '@rolldown/binding-darwin-arm64@1.0.0-rc.4':
     optional: true
 
+  '@rolldown/binding-darwin-x64@1.0.0-rc.12':
+    optional: true
+
   '@rolldown/binding-darwin-x64@1.0.0-rc.4':
+    optional: true
+
+  '@rolldown/binding-freebsd-x64@1.0.0-rc.12':
     optional: true
 
   '@rolldown/binding-freebsd-x64@1.0.0-rc.4':
     optional: true
 
+  '@rolldown/binding-linux-arm-gnueabihf@1.0.0-rc.12':
+    optional: true
+
   '@rolldown/binding-linux-arm-gnueabihf@1.0.0-rc.4':
+    optional: true
+
+  '@rolldown/binding-linux-arm64-gnu@1.0.0-rc.12':
     optional: true
 
   '@rolldown/binding-linux-arm64-gnu@1.0.0-rc.4':
     optional: true
 
+  '@rolldown/binding-linux-arm64-musl@1.0.0-rc.12':
+    optional: true
+
   '@rolldown/binding-linux-arm64-musl@1.0.0-rc.4':
+    optional: true
+
+  '@rolldown/binding-linux-ppc64-gnu@1.0.0-rc.12':
+    optional: true
+
+  '@rolldown/binding-linux-s390x-gnu@1.0.0-rc.12':
+    optional: true
+
+  '@rolldown/binding-linux-x64-gnu@1.0.0-rc.12':
     optional: true
 
   '@rolldown/binding-linux-x64-gnu@1.0.0-rc.4':
     optional: true
 
+  '@rolldown/binding-linux-x64-musl@1.0.0-rc.12':
+    optional: true
+
   '@rolldown/binding-linux-x64-musl@1.0.0-rc.4':
     optional: true
 
+  '@rolldown/binding-openharmony-arm64@1.0.0-rc.12':
+    optional: true
+
   '@rolldown/binding-openharmony-arm64@1.0.0-rc.4':
+    optional: true
+
+  '@rolldown/binding-wasm32-wasi@1.0.0-rc.12(@emnapi/core@1.9.2)(@emnapi/runtime@1.9.2)':
+    dependencies:
+      '@napi-rs/wasm-runtime': 1.1.2(@emnapi/core@1.9.2)(@emnapi/runtime@1.9.2)
+    transitivePeerDependencies:
+      - '@emnapi/core'
+      - '@emnapi/runtime'
     optional: true
 
   '@rolldown/binding-wasm32-wasi@1.0.0-rc.4(@emnapi/core@1.9.2)(@emnapi/runtime@1.9.2)':
@@ -8465,11 +8807,19 @@ snapshots:
       - '@emnapi/runtime'
     optional: true
 
+  '@rolldown/binding-win32-arm64-msvc@1.0.0-rc.12':
+    optional: true
+
   '@rolldown/binding-win32-arm64-msvc@1.0.0-rc.4':
+    optional: true
+
+  '@rolldown/binding-win32-x64-msvc@1.0.0-rc.12':
     optional: true
 
   '@rolldown/binding-win32-x64-msvc@1.0.0-rc.4':
     optional: true
+
+  '@rolldown/pluginutils@1.0.0-rc.12': {}
 
   '@rolldown/pluginutils@1.0.0-rc.4': {}
 
@@ -8735,6 +9085,75 @@ snapshots:
 
   '@standard-schema/spec@1.1.0': {}
 
+  '@tailwindcss/node@4.2.2':
+    dependencies:
+      '@jridgewell/remapping': 2.3.5
+      enhanced-resolve: 5.20.1
+      jiti: 2.6.1
+      lightningcss: 1.32.0
+      magic-string: 0.30.21
+      source-map-js: 1.2.1
+      tailwindcss: 4.2.2
+
+  '@tailwindcss/oxide-android-arm64@4.2.2':
+    optional: true
+
+  '@tailwindcss/oxide-darwin-arm64@4.2.2':
+    optional: true
+
+  '@tailwindcss/oxide-darwin-x64@4.2.2':
+    optional: true
+
+  '@tailwindcss/oxide-freebsd-x64@4.2.2':
+    optional: true
+
+  '@tailwindcss/oxide-linux-arm-gnueabihf@4.2.2':
+    optional: true
+
+  '@tailwindcss/oxide-linux-arm64-gnu@4.2.2':
+    optional: true
+
+  '@tailwindcss/oxide-linux-arm64-musl@4.2.2':
+    optional: true
+
+  '@tailwindcss/oxide-linux-x64-gnu@4.2.2':
+    optional: true
+
+  '@tailwindcss/oxide-linux-x64-musl@4.2.2':
+    optional: true
+
+  '@tailwindcss/oxide-wasm32-wasi@4.2.2':
+    optional: true
+
+  '@tailwindcss/oxide-win32-arm64-msvc@4.2.2':
+    optional: true
+
+  '@tailwindcss/oxide-win32-x64-msvc@4.2.2':
+    optional: true
+
+  '@tailwindcss/oxide@4.2.2':
+    optionalDependencies:
+      '@tailwindcss/oxide-android-arm64': 4.2.2
+      '@tailwindcss/oxide-darwin-arm64': 4.2.2
+      '@tailwindcss/oxide-darwin-x64': 4.2.2
+      '@tailwindcss/oxide-freebsd-x64': 4.2.2
+      '@tailwindcss/oxide-linux-arm-gnueabihf': 4.2.2
+      '@tailwindcss/oxide-linux-arm64-gnu': 4.2.2
+      '@tailwindcss/oxide-linux-arm64-musl': 4.2.2
+      '@tailwindcss/oxide-linux-x64-gnu': 4.2.2
+      '@tailwindcss/oxide-linux-x64-musl': 4.2.2
+      '@tailwindcss/oxide-wasm32-wasi': 4.2.2
+      '@tailwindcss/oxide-win32-arm64-msvc': 4.2.2
+      '@tailwindcss/oxide-win32-x64-msvc': 4.2.2
+
+  '@tailwindcss/postcss@4.2.2':
+    dependencies:
+      '@alloc/quick-lru': 5.2.0
+      '@tailwindcss/node': 4.2.2
+      '@tailwindcss/oxide': 4.2.2
+      postcss: 8.5.8
+      tailwindcss: 4.2.2
+
   '@tanstack/query-core@5.90.16': {}
 
   '@tufjs/canonical-json@2.0.0': {}
@@ -8940,9 +9359,9 @@ snapshots:
       '@typescript-eslint/types': 8.58.0
       eslint-visitor-keys: 5.0.1
 
-  '@vitejs/plugin-basic-ssl@2.1.4(vite@7.3.1(@types/node@25.5.2)(jiti@2.6.1)(less@4.4.2)(sass@1.97.3)(terser@5.46.0))':
+  '@vitejs/plugin-basic-ssl@2.1.4(vite@8.0.5(@emnapi/core@1.9.2)(@emnapi/runtime@1.9.2)(@types/node@25.5.2)(esbuild@0.27.3)(jiti@2.6.1)(less@4.4.2)(sass@1.97.3)(terser@5.46.0))':
     dependencies:
-      vite: 7.3.1(@types/node@25.5.2)(jiti@2.6.1)(less@4.4.2)(sass@1.97.3)(terser@5.46.0)
+      vite: 8.0.5(@emnapi/core@1.9.2)(@emnapi/runtime@1.9.2)(@types/node@25.5.2)(esbuild@0.27.3)(jiti@2.6.1)(less@4.4.2)(sass@1.97.3)(terser@5.46.0)
 
   '@webassemblyjs/ast@1.14.1':
     dependencies:
@@ -9670,8 +10089,7 @@ snapshots:
 
   destroy@1.2.0: {}
 
-  detect-libc@2.1.2:
-    optional: true
+  detect-libc@2.1.2: {}
 
   detect-node@2.1.0: {}
 
@@ -10791,6 +11209,55 @@ snapshots:
     optionalDependencies:
       webpack: 5.105.2(esbuild@0.27.3)
 
+  lightningcss-android-arm64@1.32.0:
+    optional: true
+
+  lightningcss-darwin-arm64@1.32.0:
+    optional: true
+
+  lightningcss-darwin-x64@1.32.0:
+    optional: true
+
+  lightningcss-freebsd-x64@1.32.0:
+    optional: true
+
+  lightningcss-linux-arm-gnueabihf@1.32.0:
+    optional: true
+
+  lightningcss-linux-arm64-gnu@1.32.0:
+    optional: true
+
+  lightningcss-linux-arm64-musl@1.32.0:
+    optional: true
+
+  lightningcss-linux-x64-gnu@1.32.0:
+    optional: true
+
+  lightningcss-linux-x64-musl@1.32.0:
+    optional: true
+
+  lightningcss-win32-arm64-msvc@1.32.0:
+    optional: true
+
+  lightningcss-win32-x64-msvc@1.32.0:
+    optional: true
+
+  lightningcss@1.32.0:
+    dependencies:
+      detect-libc: 2.1.2
+    optionalDependencies:
+      lightningcss-android-arm64: 1.32.0
+      lightningcss-darwin-arm64: 1.32.0
+      lightningcss-darwin-x64: 1.32.0
+      lightningcss-freebsd-x64: 1.32.0
+      lightningcss-linux-arm-gnueabihf: 1.32.0
+      lightningcss-linux-arm64-gnu: 1.32.0
+      lightningcss-linux-arm64-musl: 1.32.0
+      lightningcss-linux-x64-gnu: 1.32.0
+      lightningcss-linux-x64-musl: 1.32.0
+      lightningcss-win32-arm64-msvc: 1.32.0
+      lightningcss-win32-x64-msvc: 1.32.0
+
   lines-and-columns@1.2.4: {}
 
   listr2@9.0.5:
@@ -11129,7 +11596,7 @@ snapshots:
 
   nerf-dart@1.0.0: {}
 
-  ng-packagr@21.2.2(@angular/compiler-cli@21.2.7(@angular/compiler@21.2.7)(typescript@5.9.3))(tslib@2.8.1)(typescript@5.9.3):
+  ng-packagr@21.2.2(@angular/compiler-cli@21.2.7(@angular/compiler@21.2.7)(typescript@5.9.3))(tailwindcss@4.2.2)(tslib@2.8.1)(typescript@5.9.3):
     dependencies:
       '@ampproject/remapping': 2.3.0
       '@angular/compiler-cli': 21.2.7(@angular/compiler@21.2.7)(typescript@5.9.3)
@@ -11157,6 +11624,7 @@ snapshots:
       typescript: 5.9.3
     optionalDependencies:
       rollup: 4.60.1
+      tailwindcss: 4.2.2
 
   node-addon-api@6.1.0:
     optional: true
@@ -11771,6 +12239,30 @@ snapshots:
       glob: 7.2.3
     optional: true
 
+  rolldown@1.0.0-rc.12(@emnapi/core@1.9.2)(@emnapi/runtime@1.9.2):
+    dependencies:
+      '@oxc-project/types': 0.122.0
+      '@rolldown/pluginutils': 1.0.0-rc.12
+    optionalDependencies:
+      '@rolldown/binding-android-arm64': 1.0.0-rc.12
+      '@rolldown/binding-darwin-arm64': 1.0.0-rc.12
+      '@rolldown/binding-darwin-x64': 1.0.0-rc.12
+      '@rolldown/binding-freebsd-x64': 1.0.0-rc.12
+      '@rolldown/binding-linux-arm-gnueabihf': 1.0.0-rc.12
+      '@rolldown/binding-linux-arm64-gnu': 1.0.0-rc.12
+      '@rolldown/binding-linux-arm64-musl': 1.0.0-rc.12
+      '@rolldown/binding-linux-ppc64-gnu': 1.0.0-rc.12
+      '@rolldown/binding-linux-s390x-gnu': 1.0.0-rc.12
+      '@rolldown/binding-linux-x64-gnu': 1.0.0-rc.12
+      '@rolldown/binding-linux-x64-musl': 1.0.0-rc.12
+      '@rolldown/binding-openharmony-arm64': 1.0.0-rc.12
+      '@rolldown/binding-wasm32-wasi': 1.0.0-rc.12(@emnapi/core@1.9.2)(@emnapi/runtime@1.9.2)
+      '@rolldown/binding-win32-arm64-msvc': 1.0.0-rc.12
+      '@rolldown/binding-win32-x64-msvc': 1.0.0-rc.12
+    transitivePeerDependencies:
+      - '@emnapi/core'
+      - '@emnapi/runtime'
+
   rolldown@1.0.0-rc.4(@emnapi/core@1.9.2)(@emnapi/runtime@1.9.2):
     dependencies:
       '@oxc-project/types': 0.113.0
@@ -12305,6 +12797,8 @@ snapshots:
 
   tagged-tag@1.0.0: {}
 
+  tailwindcss@4.2.2: {}
+
   tapable@2.3.2: {}
 
   tar@7.5.13:
@@ -12324,7 +12818,7 @@ snapshots:
       type-fest: 2.19.0
       unique-string: 3.0.0
 
-  terser-webpack-plugin@5.4.0(esbuild@0.27.3)(webpack@5.105.2):
+  terser-webpack-plugin@5.4.0(esbuild@0.27.3)(webpack@5.105.2(esbuild@0.27.3)):
     dependencies:
       '@jridgewell/trace-mapping': 0.3.31
       jest-worker: 27.5.1
@@ -12521,21 +13015,24 @@ snapshots:
 
   vary@1.1.2: {}
 
-  vite@7.3.1(@types/node@25.5.2)(jiti@2.6.1)(less@4.4.2)(sass@1.97.3)(terser@5.46.0):
+  vite@8.0.5(@emnapi/core@1.9.2)(@emnapi/runtime@1.9.2)(@types/node@25.5.2)(esbuild@0.27.3)(jiti@2.6.1)(less@4.4.2)(sass@1.97.3)(terser@5.46.0):
     dependencies:
-      esbuild: 0.27.7
-      fdir: 6.5.0(picomatch@4.0.4)
+      lightningcss: 1.32.0
       picomatch: 4.0.4
       postcss: 8.5.8
-      rollup: 4.60.1
+      rolldown: 1.0.0-rc.12(@emnapi/core@1.9.2)(@emnapi/runtime@1.9.2)
       tinyglobby: 0.2.15
     optionalDependencies:
       '@types/node': 25.5.2
+      esbuild: 0.27.3
       fsevents: 2.3.3
       jiti: 2.6.1
       less: 4.4.2
       sass: 1.97.3
       terser: 5.46.0
+    transitivePeerDependencies:
+      - '@emnapi/core'
+      - '@emnapi/runtime'
 
   void-elements@2.0.1:
     optional: true
@@ -12554,7 +13051,7 @@ snapshots:
 
   web-worker@1.5.0: {}
 
-  webpack-dev-middleware@7.4.5(tslib@2.8.1)(webpack@5.105.2):
+  webpack-dev-middleware@7.4.5(tslib@2.8.1)(webpack@5.105.2(esbuild@0.27.3)):
     dependencies:
       colorette: 2.0.20
       memfs: 4.57.1(tslib@2.8.1)
@@ -12567,7 +13064,7 @@ snapshots:
     transitivePeerDependencies:
       - tslib
 
-  webpack-dev-server@5.2.3(tslib@2.8.1)(webpack@5.105.2):
+  webpack-dev-server@5.2.3(tslib@2.8.1)(webpack@5.105.2(esbuild@0.27.3)):
     dependencies:
       '@types/bonjour': 3.5.13
       '@types/connect-history-api-fallback': 1.5.4
@@ -12595,7 +13092,7 @@ snapshots:
       serve-index: 1.9.2
       sockjs: 0.3.24
       spdy: 4.0.2
-      webpack-dev-middleware: 7.4.5(tslib@2.8.1)(webpack@5.105.2)
+      webpack-dev-middleware: 7.4.5(tslib@2.8.1)(webpack@5.105.2(esbuild@0.27.3))
       ws: 8.20.0
     optionalDependencies:
       webpack: 5.105.2(esbuild@0.27.3)
@@ -12643,7 +13140,7 @@ snapshots:
       neo-async: 2.6.2
       schema-utils: 4.3.3
       tapable: 2.3.2
-      terser-webpack-plugin: 5.4.0(esbuild@0.27.3)(webpack@5.105.2)
+      terser-webpack-plugin: 5.4.0(esbuild@0.27.3)(webpack@5.105.2(esbuild@0.27.3))
       watchpack: 2.5.1
       webpack-sources: 3.3.4
     transitivePeerDependencies:
