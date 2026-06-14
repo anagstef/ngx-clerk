@@ -36,7 +36,7 @@ export const loadClerkScripts = (opts: ClerkInitOptions): { clerkPromise: Promis
 
   const uiOpts = { publishableKey, proxyUrl: opts.proxyUrl, domain: opts.domain, nonce: opts.nonce };
 
-  // Fire both downloads in parallel (same approach as Vue SDK)
+  // Fire both ClerkJS and ClerkUI downloads in parallel
   const clerkPromise = loadClerkJSScriptShared(scriptOpts).catch(() => {
     throw new Error(FAILED_TO_LOAD_ERROR);
   });

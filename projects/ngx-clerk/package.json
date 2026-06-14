@@ -1,7 +1,7 @@
 {
   "name": "ngx-clerk",
   "version": "1.0.0",
-  "description": "Unofficial Clerk.com SDK for Angular",
+  "description": "Unofficial Clerk SDK for Angular (Core 3) — components, services, directives, and route guards",
   "keywords": [
     "clerk",
     "typescript",
@@ -23,7 +23,7 @@
   },
   "license": "MIT",
   "engines": {
-    "node": ">=24.0.0"
+    "node": ">=18.19.0"
   },
   "author": "https://github.com/anagstef",
   "dependencies": {

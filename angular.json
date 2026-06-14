@@ -10,7 +10,7 @@
       "prefix": "lib",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "builder": "@angular/build:ng-packagr",
           "options": {
             "project": "projects/ngx-clerk/ng-package.json"
           },
@@ -31,6 +31,14 @@
               "projects/ngx-clerk/**/*.ts",
               "projects/ngx-clerk/**/*.html"
             ]
+          }
+        },
+        "test": {
+          "builder": "@angular/build:unit-test",
+          "options": {
+            "tsConfig": "projects/ngx-clerk/tsconfig.spec.json",
+            "runner": "vitest",
+            "watch": false
           }
         }
       }

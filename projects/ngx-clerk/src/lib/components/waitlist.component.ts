@@ -1,57 +1,26 @@
-import {
-  AfterViewInit,
-  ChangeDetectionStrategy,
-  Component,
-  effect,
-  ElementRef,
-  inject,
-  Injector,
-  Input,
-  OnDestroy,
-  ViewChild,
-  ViewEncapsulation,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, ViewEncapsulation, input, viewChild } from '@angular/core';
 import type { WaitlistProps } from '@clerk/shared/types';
-import { ClerkService } from '../services/clerk.service';
+import { mountClerkComponent } from '../utils/mount';
 
 @Component({
   selector: 'clerk-waitlist',
   standalone: true,
-  imports: [],
   template: `<div #ref></div>`,
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
 })
 /** Renders the Clerk Waitlist UI component. */
-export class ClerkWaitlistComponent implements AfterViewInit, OnDestroy {
-  @ViewChild('ref') ref: ElementRef | null = null;
-  @Input() props: WaitlistProps | undefined;
+export class ClerkWaitlistComponent {
+  /** Props forwarded to the Clerk Waitlist component. Updates re-mount the component. */
+  readonly props = input<WaitlistProps | undefined>(undefined);
+  private readonly _ref = viewChild<ElementRef<HTMLElement>>('ref');
 
-  private _clerk = inject(ClerkService);
-  private _injector = inject(Injector);
-  private _mounted = false;
-
-  ngAfterViewInit() {
-    const clerkInstance = this._clerk.clerk();
-    if (clerkInstance && this.ref) {
-      clerkInstance.mountWaitlist(this.ref.nativeElement, this.props);
-      this._mounted = true;
-    } else {
-      const mountEffect = effect(() => {
-        const c = this._clerk.clerk();
-        if (c && this.ref && !this._mounted) {
-          c.mountWaitlist(this.ref.nativeElement, this.props);
-          this._mounted = true;
-          mountEffect.destroy();
-        }
-      }, { injector: this._injector });
-    }
-  }
-
-  ngOnDestroy() {
-    const clerkInstance = this._clerk.clerk();
-    if (clerkInstance && this.ref && this._mounted) {
-      clerkInstance.unmountWaitlist(this.ref.nativeElement);
-    }
+  constructor() {
+    mountClerkComponent<WaitlistProps>({
+      node: () => this._ref()?.nativeElement,
+      props: () => this.props(),
+      mount: (clerk, node, props) => clerk.mountWaitlist(node, props),
+      unmount: (clerk, node) => clerk.unmountWaitlist(node),
+    });
   }
 }

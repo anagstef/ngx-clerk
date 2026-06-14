@@ -1,18 +1,30 @@
 import { Injectable, NgZone, PLATFORM_ID, computed, inject, signal } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { Router } from '@angular/router';
+import { deriveState } from '@clerk/shared/deriveState';
+import { createCheckAuthorization } from '@clerk/shared/authorization';
 import type {
   ActiveSessionResource,
+  CheckAuthorizationWithCustomPermissions,
   Clerk,
   ClerkOptions,
   ClientResource,
   CreateOrganizationProps,
+  GetTokenOptions,
+  HandleOAuthCallbackParams,
+  JwtPayload,
+  OrganizationMembershipResource,
   OrganizationProfileProps,
   OrganizationResource,
+  SessionResource,
+  SetActiveParams,
   SignInProps,
   SignInRedirectOptions,
+  SignInResource,
+  SignOutOptions,
   SignUpProps,
   SignUpRedirectOptions,
+  SignUpResource,
   UserProfileProps,
   UserResource,
   Without,
@@ -35,6 +47,15 @@ declare global {
   interface Window {
     Clerk: HeadlessBrowserClerk | BrowserClerk;
   }
+}
+
+/** The authorization parameters accepted by {@link ClerkService.has}. */
+export type CheckAuthorizationParams = Parameters<CheckAuthorizationWithCustomPermissions>[0];
+
+/** Options accepted by {@link ClerkService.updateClerkOptions}. */
+export interface ClerkUpdateOptions {
+  localization?: ClerkOptions['localization'];
+  appearance?: ClerkOptions['appearance'];
 }
 
 /**
@@ -85,6 +106,69 @@ export class ClerkService {
   readonly userId = computed(() => this._user()?.id ?? null);
   /** The current active organization's ID, or `null` if none is active. */
   readonly orgId = computed(() => this._organization()?.id ?? null);
+
+  /**
+   * Auth state derived from the current Clerk resources, built from the cached
+   * session JWT claims.
+   */
+  private readonly _derivedState = computed(() =>
+    deriveState(
+      this.isLoaded(),
+      {
+        client: this._client(),
+        session: this._session(),
+        user: this._user(),
+        organization: this._organization(),
+      } as Parameters<typeof deriveState>[1],
+      undefined,
+    ),
+  );
+
+  /** The active session's ID, or `null` if not signed in. */
+  readonly sessionId = computed(() => this._derivedState().sessionId ?? null);
+  /** The current user's role in the active organization, or `null`. */
+  readonly orgRole = computed(() => this._derivedState().orgRole ?? null);
+  /** The active organization's slug, or `null`. */
+  readonly orgSlug = computed(() => this._derivedState().orgSlug ?? null);
+  /** The claims of the active session's JWT, or `null`. */
+  readonly sessionClaims = computed(() => this._derivedState().sessionClaims ?? null);
+  /** The actor (impersonation) claim of the active session, or `null`. */
+  readonly actor = computed(() => this._derivedState().actor ?? null);
+
+  /** The active sign-in attempt resource, or `null`. */
+  readonly signIn = computed<SignInResource | null>(() => this._client()?.signIn ?? null);
+  /** The active sign-up attempt resource, or `null`. */
+  readonly signUp = computed<SignUpResource | null>(() => this._client()?.signUp ?? null);
+  /** All sessions registered on the current client device. */
+  readonly sessions = computed<SessionResource[]>(() => this._client()?.sessions ?? []);
+
+  /** The current user's membership in the active organization, or `null`. */
+  readonly membership = computed<OrganizationMembershipResource | null>(() => {
+    const orgId = this.orgId();
+    const user = this._user();
+    if (!orgId || !user) {
+      return null;
+    }
+    return user.organizationMemberships?.find((m) => m.organization.id === orgId) ?? null;
+  });
+
+  /**
+   * The authorization checker for the current session, built from the cached
+   * JWT claims. Returns `false` while signed out.
+   */
+  private readonly _checkAuthorization = computed<CheckAuthorizationWithCustomPermissions>(() => {
+    const d = this._derivedState();
+    const claims = d.sessionClaims as (JwtPayload & { fea?: string; pla?: string }) | null | undefined;
+    return createCheckAuthorization({
+      userId: d.userId,
+      orgId: d.orgId,
+      orgRole: d.orgRole,
+      orgPermissions: d.orgPermissions,
+      factorVerificationAge: d.factorVerificationAge,
+      features: claims?.fea || '',
+      plans: claims?.pla || '',
+    });
+  });
 
   /**
    * Initialize ClerkJS. Called internally by provideClerk() via APP_INITIALIZER.
@@ -143,22 +227,64 @@ export class ClerkService {
     });
   }
 
+  // --- Authorization & Tokens ---
+
+  /**
+   * Checks whether the current user satisfies an authorization condition
+   * (role, permission, feature, or plan). Returns `false` while signed out.
+   *
+   * @example
+   * ```ts
+   * if (clerk.has({ role: 'org:admin' })) { ... }
+   * if (clerk.has({ permission: 'org:posts:manage' })) { ... }
+   * ```
+   */
+  has(params: CheckAuthorizationParams): boolean {
+    return this._checkAuthorization()(params);
+  }
+
+  /**
+   * Returns the current session token (JWT), optionally for a named template.
+   * Resolves to `null` when there is no active session.
+   */
+  getToken(options?: GetTokenOptions): Promise<string | null> {
+    const session = this._session();
+    if (!session) {
+      return Promise.resolve(null);
+    }
+    return session.getToken(options);
+  }
+
+  /** Sets the active session and/or organization. */
+  setActive(params: SetActiveParams): Promise<void> {
+    return this.clerk()?.setActive(params) ?? Promise.resolve();
+  }
+
+  /** Completes an OAuth/SSO redirect flow by handling the callback. */
+  async handleRedirectCallback(params?: HandleOAuthCallbackParams): Promise<void> {
+    await this.clerk()?.handleRedirectCallback(params ?? {});
+  }
+
   // --- Appearance & Localization ---
 
   /** Updates the global appearance configuration for all Clerk components. */
   updateAppearance(opts: ClerkOptions['appearance']) {
-    const clerkInstance = this.clerk();
-    if (clerkInstance) {
-      clerkInstance.__internal_updateProps({ appearance: opts });
-    }
+    this.clerk()?.__internal_updateProps({ appearance: opts });
   }
 
   /** Updates the localization configuration for all Clerk components. */
   updateLocalization(opts: ClerkOptions['localization']) {
-    const clerkInstance = this.clerk();
-    if (clerkInstance) {
-      clerkInstance.__internal_updateProps({ localization: opts });
-    }
+    this.clerk()?.__internal_updateProps({ options: { localization: opts } });
+  }
+
+  /**
+   * Updates Clerk's global options (localization and/or appearance) at runtime.
+   */
+  updateClerkOptions(options: ClerkUpdateOptions) {
+    this.clerk()?.__internal_updateProps({
+      options: { localization: options.localization },
+      appearance: options.appearance,
+    });
   }
 
   // --- Open / Close UI ---
@@ -228,7 +354,7 @@ export class ClerkService {
   // --- Sign Out ---
 
   /** Signs out the current user. */
-  signOut(opts?: Parameters<Clerk['signOut']>[0]) {
+  signOut(opts?: SignOutOptions) {
     return this.clerk()?.signOut(opts) ?? Promise.resolve();
   }
 }
