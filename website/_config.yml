@@ -1,0 +1,25 @@
+title: ngx-clerk
+description: Unofficial Clerk SDK for Angular (Core 3)
+theme: just-the-docs
+
+# Project site lives at https://anagstef.github.io/ngx-clerk/
+# The base path is injected at build time by the GitHub Pages workflow.
+url: https://anagstef.github.io
+
+color_scheme: dark
+search_enabled: true
+heading_anchors: true
+
+aux_links:
+  GitHub:
+    - https://github.com/anagstef/ngx-clerk
+  npm:
+    - https://www.npmjs.com/package/ngx-clerk
+aux_links_new_tab: true
+
+footer_content: "Unofficial, community-maintained &middot; not affiliated with Clerk.com"
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - vendor
