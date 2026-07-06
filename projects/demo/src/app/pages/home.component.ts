@@ -1,10 +1,14 @@
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { ClerkService } from 'ngx-clerk';
+import {
+  ClerkSignedInDirective,
+  ClerkSignedOutDirective,
+  ClerkSignInButtonDirective,
+} from 'ngx-clerk';
 
 @Component({
   selector: 'app-home',
-  imports: [RouterLink],
+  imports: [RouterLink, ClerkSignedInDirective, ClerkSignedOutDirective, ClerkSignInButtonDirective],
   template: `
     <div class="min-h-screen bg-gradient-to-br from-dark to-dark-end text-white">
       <!-- Navigation -->
@@ -19,23 +23,20 @@ import { ClerkService } from 'ngx-clerk';
           >
             GitHub
           </a>
-          @if (clerk.isLoaded()) {
-            @if (clerk.isSignedIn()) {
-              <a
-                routerLink="/dashboard"
-                class="inline-flex items-center px-4 py-2 rounded-lg bg-primary text-white text-sm font-medium hover:bg-primary-hover transition-colors"
-              >
-                Dashboard
-              </a>
-            } @else {
-              <a
-                routerLink="/sign-in"
-                class="inline-flex items-center px-4 py-2 rounded-lg bg-primary text-white text-sm font-medium hover:bg-primary-hover transition-colors"
-              >
-                Sign in
-              </a>
-            }
-          }
+          <a
+            *clerkSignedIn
+            routerLink="/dashboard"
+            class="inline-flex items-center px-4 py-2 rounded-lg bg-primary text-white text-sm font-medium hover:bg-primary-hover transition-colors"
+          >
+            Dashboard
+          </a>
+          <a
+            *clerkSignedOut
+            routerLink="/sign-in"
+            class="inline-flex items-center px-4 py-2 rounded-lg bg-primary text-white text-sm font-medium hover:bg-primary-hover transition-colors"
+          >
+            Sign in
+          </a>
         </div>
       </nav>
 
@@ -51,29 +52,28 @@ import { ClerkService } from 'ngx-clerk';
           Drop-in Clerk components for sign-in, user management, and organizations
         </p>
         <div class="flex items-center justify-center gap-3">
-          @if (clerk.isLoaded() && clerk.isSignedIn()) {
-            <a
-              routerLink="/dashboard"
-              class="inline-flex items-center px-6 py-3 rounded-lg bg-primary text-white font-medium hover:bg-primary-hover transition-colors"
-            >
-              Go to Dashboard
-            </a>
-          } @else {
+          <a
+            *clerkSignedIn
+            routerLink="/dashboard"
+            class="inline-flex items-center px-6 py-3 rounded-lg bg-primary text-white font-medium hover:bg-primary-hover transition-colors"
+          >
+            Go to Dashboard
+          </a>
+          <ng-container *clerkSignedOut>
             <a
               routerLink="/sign-in"
               class="inline-flex items-center px-6 py-3 rounded-lg bg-primary text-white font-medium hover:bg-primary-hover transition-colors"
             >
               Get Started
             </a>
-          }
-          <a
-            href="https://github.com/anagstef/ngx-clerk#readme"
-            target="_blank"
-            rel="noopener"
-            class="inline-flex items-center px-6 py-3 rounded-lg border border-white/20 text-white font-medium hover:bg-white/5 transition-colors"
-          >
-            Documentation
-          </a>
+            <button
+              clerkSignInButton
+              mode="modal"
+              class="inline-flex items-center px-6 py-3 rounded-lg border border-white/20 text-white font-medium hover:bg-white/5 transition-colors"
+            >
+              Sign in (modal)
+            </button>
+          </ng-container>
         </div>
       </section>
 
@@ -118,7 +118,7 @@ import { ClerkService } from 'ngx-clerk';
           <span>Built with ngx-clerk</span>
           <div class="flex items-center gap-6">
             <a href="https://clerk.com/docs" target="_blank" rel="noopener" class="hover:text-white transition-colors">Clerk Docs</a>
-            <a href="https://github.com/anagstef/ngx-clerk" target="_blank" rel="noopener" class="hover:text-white transition-colors">GitHub</a>
+            <a routerLink="/waitlist" class="hover:text-white transition-colors">Waitlist</a>
             <a href="https://www.npmjs.com/package/ngx-clerk" target="_blank" rel="noopener" class="hover:text-white transition-colors">npm</a>
           </div>
         </div>
@@ -126,6 +126,4 @@ import { ClerkService } from 'ngx-clerk';
     </div>
   `,
 })
-export class HomeComponent {
-  clerk = inject(ClerkService);
-}
+export class HomeComponent {}

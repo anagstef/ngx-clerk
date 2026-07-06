@@ -1,127 +1,72 @@
 # ngx-clerk
 
-Welcome to **ngx-clerk**, an unofficial Angular package that integrates with [Clerk](https://clerk.com/).
+[![npm version](https://img.shields.io/npm/v/ngx-clerk)](https://www.npmjs.com/package/ngx-clerk)
+[![CI](https://github.com/anagstef/ngx-clerk/actions/workflows/ci.yml/badge.svg)](https://github.com/anagstef/ngx-clerk/actions/workflows/ci.yml)
+[![license](https://img.shields.io/npm/l/ngx-clerk)](./LICENSE)
 
-### Disclaimer: This unofficial package is not affiliated with Clerk.com. It is an unofficial project that aims to provide a seamless integration of Clerk features into Angular applications.
+Unofficial [Clerk](https://clerk.com) SDK for Angular — signals-based auth state, all Clerk UI components, route guards, and template directives.
 
-## Prerequisites
+> Community-maintained, not affiliated with Clerk. Supports Clerk Core 3 (ClerkJS v6), Angular 20+, Node 20.19+. Client-side rendering only.
 
-- Angular version **19 or higher**.
-- Clerk Core 3 (ClerkJS v6).
-- Currently, this package supports **client-side operations only**. Server-Side Rendering (SSR) is not supported at the moment.
+## Documentation
 
-## Installation
+**Full docs: [anagstef.github.io/ngx-clerk](https://anagstef.github.io/ngx-clerk/)** — quickstart, components, guards, organizations, [migration from v0](https://anagstef.github.io/ngx-clerk/migration.html), and [LLM-ready docs](https://anagstef.github.io/ngx-clerk/ai-agents.html).
+
+## Quickstart
 
 ```bash
-npm i ngx-clerk
+npm install ngx-clerk
 ```
 
-## Getting Started
-
-1. Create an app in [Clerk Dashboard](https://dashboard.clerk.com/) and get the Publishable Key.
-2. **Add `provideClerk()` to your app config**:
-
-```typescript
+```ts
 // app.config.ts
-import { ApplicationConfig } from '@angular/core';
-import { provideRouter } from '@angular/router';
 import { provideClerk } from 'ngx-clerk';
-import { routes } from './app.routes';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
     provideClerk({
-      publishableKey: 'pk_test_XXXXXXXX',
+      publishableKey: 'pk_test_XXXX',
+      signInUrl: '/sign-in',
+      signUpUrl: '/sign-up',
     }),
   ],
 };
 ```
 
-3. **Use Clerk components in your templates**:
-
-```typescript
-// app.component.ts
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { ClerkUserButtonComponent } from 'ngx-clerk';
-
-@Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [RouterOutlet, ClerkUserButtonComponent],
-  template: `
-    <clerk-user-button />
-    <router-outlet />
-  `,
-})
-export class AppComponent {}
-```
-
-4. **Protect routes** with the `canActivateClerk` guard:
-
-```typescript
+```ts
 // app.routes.ts
-import { Routes } from '@angular/router';
-import { canActivateClerk } from 'ngx-clerk';
+import { canActivateClerk, catchAllRoute } from 'ngx-clerk';
 
 export const routes: Routes = [
-  { path: '', component: HomeComponent },
-  {
-    path: 'dashboard',
-    component: DashboardComponent,
-    canActivate: [canActivateClerk],
-  },
+  { matcher: catchAllRoute('sign-in'), component: SignInPageComponent },
+  { path: 'dashboard', component: DashboardComponent, canActivate: [canActivateClerk] },
 ];
 ```
 
-5. **Access auth state** via signals on `ClerkService`:
-
-```typescript
-import { Component, inject } from '@angular/core';
-import { ClerkService } from 'ngx-clerk';
-
-@Component({
-  selector: 'app-dashboard',
-  template: `
-    @if (clerk.user(); as user) {
-      <p>Hello {{ user.firstName }}</p>
-    }
-  `,
-})
-export class DashboardComponent {
-  clerk = inject(ClerkService);
-}
+```html
+<!-- Anywhere in your templates -->
+<clerk-user-button *clerkSignedIn />
+<button *clerkSignedOut clerkSignInButton>Sign in</button>
 ```
 
-## Features
-
-- **Clerk UI Components**: All Clerk UI components are available and prefixed with `clerk-`:
-    1. `<clerk-sign-in />`
-    2. `<clerk-sign-up />`
-    3. `<clerk-user-profile />`
-    4. `<clerk-user-button />`
-    5. `<clerk-organization-profile />`
-    6. `<clerk-organization-switcher />`
-    7. `<clerk-organization-list />`
-    8. `<clerk-create-organization />`
-    9. `<clerk-waitlist />`
-    10. `<clerk-user-avatar />`
-    11. `<clerk-pricing-table />`
-
-- **ClerkService**: Central service exposing auth state as Angular signals:
-    - `user()` - Current `UserResource` or `null`
-    - `session()` - Current `ActiveSessionResource` or `null`
-    - `organization()` - Current `OrganizationResource` or `null`
-    - `client()` - Current `ClientResource` or `null`
-    - `clerk()` - The Clerk instance or `null`
-    - `isLoaded()` - Whether Clerk has finished loading
-    - `isSignedIn()` - Whether the user is signed in
-    - `userId()` - Current user ID or `null`
-    - `orgId()` - Current organization ID or `null`
-
-- **`canActivateClerk`**: A functional route guard that protects routes and waits for Clerk to load before checking auth state.
+See the [quickstart guide](https://anagstef.github.io/ngx-clerk/quickstart.html) for the complete walkthrough.
 
 ## Migrating from v0.x
 
-See [MIGRATION.md](./MIGRATION.md) for a detailed upgrade guide.
+v1 is a rewrite for Clerk Core 3: signals instead of RxJS, `provideClerk()` instead of `__init()`, functional guards. Read it as a [docs page](https://anagstef.github.io/ngx-clerk/migration.html) or straight from [MIGRATION.md](./MIGRATION.md) in this repo — handy offline or for handing to an AI agent — or point your agent at the [migration skill](./skills/ngx-clerk-migrate-v0-v1/SKILL.md) directly.
+
+## Demo
+
+A full demo app lives in [`projects/demo`](./projects/demo). It runs out of the box against a shared Clerk dev instance — no setup required:
+
+```bash
+pnpm install
+pnpm dev
+```
+
+Open http://localhost:4200.
+
+## License
+
+[MIT](./LICENSE)

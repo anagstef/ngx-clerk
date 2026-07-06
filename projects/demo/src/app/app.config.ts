@@ -11,6 +11,8 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideClerk({
       publishableKey: environment.clerkPublishableKey,
+      signInUrl: '/sign-in',
+      signUpUrl: '/sign-up',
       appearance: {
         cssLayerName: 'clerk',
         variables: {

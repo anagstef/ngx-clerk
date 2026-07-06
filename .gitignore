@@ -43,7 +43,21 @@ Thumbs.db
 
 # Superpowers
 docs/superpowers/
+.superpowers/
 
 # Local plans
 docs/plans/
+
+# E2E
+e2e/.env
+/playwright-report
+/test-results
+
+# Docs site local artifacts
+website/_site
+website/.jekyll-cache
+website/vendor
+website/llms.txt
+website/llms-full.txt
+website/migration.md
 

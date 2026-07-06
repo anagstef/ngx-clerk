@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { canActivateClerk, catchAllRoute } from 'ngx-clerk';
+import { canActivateClerk, canActivateProtect, catchAllRoute } from 'ngx-clerk';
 
 export const routes: Routes = [
   {
@@ -13,6 +13,14 @@ export const routes: Routes = [
   {
     matcher: catchAllRoute('sign-up'),
     loadComponent: () => import('./pages/sign-up.component').then(m => m.SignUpComponent),
+  },
+  {
+    path: 'waitlist',
+    loadComponent: () => import('./pages/waitlist.component').then(m => m.WaitlistComponent),
+  },
+  {
+    path: 'sso-callback',
+    loadComponent: () => import('./pages/sso-callback.component').then(m => m.SsoCallbackComponent),
   },
   {
     path: 'dashboard',
@@ -38,6 +46,27 @@ export const routes: Routes = [
       {
         path: 'organization-list',
         loadComponent: () => import('./pages/dashboard/org-list.component').then(m => m.OrgListPageComponent),
+      },
+      {
+        path: 'sessions',
+        loadComponent: () => import('./pages/dashboard/sessions.component').then(m => m.SessionsPageComponent),
+      },
+      {
+        path: 'session-token',
+        loadComponent: () => import('./pages/dashboard/session-token.component').then(m => m.SessionTokenPageComponent),
+      },
+      {
+        path: 'protect',
+        loadComponent: () => import('./pages/dashboard/protect.component').then(m => m.ProtectPageComponent),
+      },
+      {
+        path: 'billing',
+        loadComponent: () => import('./pages/dashboard/billing.component').then(m => m.BillingPageComponent),
+      },
+      {
+        path: 'admin',
+        canActivate: [canActivateProtect({ role: 'org:admin' }, { unauthorizedUrl: '/dashboard' })],
+        loadComponent: () => import('./pages/dashboard/admin.component').then(m => m.AdminPageComponent),
       },
     ],
   },
