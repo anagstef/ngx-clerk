@@ -1,6 +1,6 @@
 ---
 title: Session tokens
-nav_order: 5
+nav_order: 6
 ---
 
 # Session tokens
@@ -17,18 +17,38 @@ You can also request a token for a specific [JWT template](https://clerk.com/doc
 const token = await clerk.getToken({ template: 'my-template' });
 ```
 
+## Handling offline errors
+
+In Clerk Core 3, `getToken()` throws a `ClerkOfflineError` — instead of resolving to `null` — when the request fails because the client is offline. Catch it with the `isClerkRuntimeError` guard, or the more specific `ClerkOfflineError.is()`:
+
+```ts
+import { ClerkOfflineError, isClerkRuntimeError } from 'ngx-clerk';
+
+try {
+  const token = await clerk.getToken();
+} catch (error) {
+  if (ClerkOfflineError.is(error)) {
+    // the client is offline — show a banner, retry later, etc.
+  } else if (isClerkRuntimeError(error)) {
+    // some other Clerk runtime error; error.code has the details
+  } else {
+    throw error;
+  }
+}
+```
+
 ## In an HTTP interceptor
 
 Attach the token to outgoing requests with a functional interceptor:
 
 ```ts
-// src/app/auth.interceptor.ts
-import { HttpInterceptorFn } from '@angular/common/http';
+// src/app/clerk-auth.interceptor.ts
 import { inject } from '@angular/core';
+import { HttpInterceptorFn } from '@angular/common/http';
 import { from, switchMap } from 'rxjs';
 import { ClerkService } from 'ngx-clerk';
 
-export const authInterceptor: HttpInterceptorFn = (req, next) => {
+export const clerkAuthInterceptor: HttpInterceptorFn = (req, next) => {
   const clerk = inject(ClerkService);
   return from(clerk.getToken()).pipe(
     switchMap((token) =>
@@ -43,11 +63,11 @@ Register it in your app config:
 ```ts
 // src/app/app.config.ts
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
-import { authInterceptor } from './auth.interceptor';
+import { clerkAuthInterceptor } from './clerk-auth.interceptor';
 
 export const appConfig = {
   providers: [
-    provideHttpClient(withInterceptors([authInterceptor])),
+    provideHttpClient(withInterceptors([clerkAuthInterceptor])),
     // …provideClerk, provideRouter, etc.
   ],
 };
