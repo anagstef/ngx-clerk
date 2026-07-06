@@ -10,6 +10,14 @@ color_scheme: dark
 search_enabled: true
 heading_anchors: true
 
+# Pages don't set a layout in front matter; without this, Jekyll emits bare
+# HTML fragments with no <head> (and therefore no theme CSS).
+defaults:
+  - scope:
+      path: ''
+    values:
+      layout: default
+
 aux_links:
   GitHub:
     - https://github.com/anagstef/ngx-clerk
