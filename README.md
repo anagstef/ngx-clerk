@@ -1,14 +1,17 @@
 # ngx-clerk
 
-Welcome to **ngx-clerk**, an unofficial Angular package that integrates with [Clerk](https://clerk.com/).
+**ngx-clerk** is an unofficial, community Angular SDK for [Clerk](https://clerk.com/) —
+drop-in components, a reactive service, structural directives, and route guards for
+authentication, user management, and organizations.
 
-### Disclaimer: This unofficial package is not affiliated with Clerk.com. It is an unofficial project that aims to provide a seamless integration of Clerk features into Angular applications.
+> **Disclaimer:** This is an unofficial, community-maintained package and is not affiliated
+> with Clerk.com.
 
 ## Prerequisites
 
 - Angular version **19 or higher**.
 - Clerk Core 3 (ClerkJS v6).
-- Currently, this package supports **client-side operations only**. Server-Side Rendering (SSR) is not supported at the moment.
+- Client-side operations only. Server-Side Rendering (SSR) is not supported at the moment.
 
 ## Installation
 
@@ -18,8 +21,8 @@ npm i ngx-clerk
 
 ## Getting Started
 
-1. Create an app in [Clerk Dashboard](https://dashboard.clerk.com/) and get the Publishable Key.
-2. **Add `provideClerk()` to your app config**:
+1. Create an app in the [Clerk Dashboard](https://dashboard.clerk.com/) and copy the Publishable Key.
+2. **Add `provideClerk()` to your app config:**
 
 ```typescript
 // app.config.ts
@@ -38,17 +41,15 @@ export const appConfig: ApplicationConfig = {
 };
 ```
 
-3. **Use Clerk components in your templates**:
+3. **Use Clerk components in your templates:**
 
 ```typescript
-// app.component.ts
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { ClerkUserButtonComponent } from 'ngx-clerk';
 
 @Component({
   selector: 'app-root',
-  standalone: true,
   imports: [RouterOutlet, ClerkUserButtonComponent],
   template: `
     <clerk-user-button />
@@ -67,15 +68,107 @@ import { canActivateClerk } from 'ngx-clerk';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
+  { path: 'dashboard', component: DashboardComponent, canActivate: [canActivateClerk] },
+];
+```
+
+## UI Components
+
+All Clerk UI components are available and prefixed with `clerk-`. They accept the
+matching Clerk props via the `[props]` input, and update reactively when the input changes.
+
+| Component | Selector |
+| --- | --- |
+| Sign In | `<clerk-sign-in />` |
+| Sign Up | `<clerk-sign-up />` |
+| User Profile | `<clerk-user-profile />` |
+| User Button | `<clerk-user-button />` |
+| User Avatar | `<clerk-user-avatar />` |
+| Organization Profile | `<clerk-organization-profile />` |
+| Organization Switcher | `<clerk-organization-switcher />` |
+| Organization List | `<clerk-organization-list />` |
+| Create Organization | `<clerk-create-organization />` |
+| Waitlist | `<clerk-waitlist />` |
+| Pricing Table | `<clerk-pricing-table />` |
+| Google One Tap | `<clerk-google-one-tap />` |
+| OAuth/SSO callback | `<clerk-authenticate-with-redirect-callback />` |
+
+```html
+<clerk-sign-in [props]="{ routing: 'path', path: '/sign-in', signUpUrl: '/sign-up' }" />
+```
+
+## Control-flow directives
+
+Idiomatic Angular structural directives for conditionally rendering content based on
+auth state:
+
+```html
+<div *clerkLoading>Loading…</div>
+
+<ng-container *clerkLoaded>
+  <clerk-user-button *clerkSignedIn />
+  <button *clerkSignedOut clerkSignInButton>Sign in</button>
+</ng-container>
+```
+
+- `*clerkSignedIn` — renders when a user is signed in.
+- `*clerkSignedOut` — renders when Clerk is loaded and no user is signed in.
+- `*clerkLoaded` / `*clerkLoading` — renders based on whether Clerk has finished loading.
+
+## Authorization
+
+Gate UI by role, permission, feature, or plan with the `*clerkProtect` directive (with an
+optional `else` template), or check imperatively with `ClerkService.has()`:
+
+```html
+<section *clerkProtect="{ role: 'org:admin' }; else noAccess">Admins only</section>
+<ng-template #noAccess>You do not have access.</ng-template>
+```
+
+Protect a whole route with the `canActivateProtect` guard factory:
+
+```typescript
+import { canActivateProtect } from 'ngx-clerk';
+
+const routes: Routes = [
   {
-    path: 'dashboard',
-    component: DashboardComponent,
-    canActivate: [canActivateClerk],
+    path: 'admin',
+    component: AdminComponent,
+    canActivate: [canActivateProtect({ role: 'org:admin' }, { unauthorizedUrl: '/dashboard' })],
   },
 ];
 ```
 
-5. **Access auth state** via signals on `ClerkService`:
+## Buttons
+
+Attribute directives that trigger auth actions on your own button, with no extra DOM:
+
+```html
+<button clerkSignInButton>Sign in</button>
+<button clerkSignUpButton mode="modal">Create account</button>
+<button clerkSignOutButton redirectUrl="/">Sign out</button>
+```
+
+## Session tokens
+
+Fetch the current session JWT to authenticate your backend:
+
+```typescript
+const token = await clerk.getToken();
+```
+
+## ClerkService
+
+Central service exposing auth state as Angular signals plus imperative helpers.
+
+**Signals:** `clerk()`, `client()`, `session()`, `user()`, `organization()`, `isLoaded()`,
+`isSignedIn()`, `userId()`, `orgId()`, `sessionId()`, `orgRole()`, `orgSlug()`,
+`sessionClaims()`, `actor()`, `signIn()`, `signUp()`, `sessions()`, `membership()`.
+
+**Methods:** `has(params)`, `getToken(options?)`, `setActive(params)`,
+`handleRedirectCallback(params?)`, `signOut(options?)`, `openSignIn()` / `closeSignIn()`
+(and the other modal open/close helpers), `redirectToSignIn()` / `redirectToSignUp()`,
+`updateAppearance()`, `updateLocalization()`, `updateClerkOptions()`.
 
 ```typescript
 import { Component, inject } from '@angular/core';
@@ -94,33 +187,14 @@ export class DashboardComponent {
 }
 ```
 
-## Features
+## OAuth / SSO callback
 
-- **Clerk UI Components**: All Clerk UI components are available and prefixed with `clerk-`:
-    1. `<clerk-sign-in />`
-    2. `<clerk-sign-up />`
-    3. `<clerk-user-profile />`
-    4. `<clerk-user-button />`
-    5. `<clerk-organization-profile />`
-    6. `<clerk-organization-switcher />`
-    7. `<clerk-organization-list />`
-    8. `<clerk-create-organization />`
-    9. `<clerk-waitlist />`
-    10. `<clerk-user-avatar />`
-    11. `<clerk-pricing-table />`
+Place the callback component on your `/sso-callback` route to complete an OAuth redirect flow:
 
-- **ClerkService**: Central service exposing auth state as Angular signals:
-    - `user()` - Current `UserResource` or `null`
-    - `session()` - Current `ActiveSessionResource` or `null`
-    - `organization()` - Current `OrganizationResource` or `null`
-    - `client()` - Current `ClientResource` or `null`
-    - `clerk()` - The Clerk instance or `null`
-    - `isLoaded()` - Whether Clerk has finished loading
-    - `isSignedIn()` - Whether the user is signed in
-    - `userId()` - Current user ID or `null`
-    - `orgId()` - Current organization ID or `null`
-
-- **`canActivateClerk`**: A functional route guard that protects routes and waits for Clerk to load before checking auth state.
+```html
+<clerk-authenticate-with-redirect-callback
+  [props]="{ signInFallbackRedirectUrl: '/dashboard' }" />
+```
 
 ## Migrating from v0.x
 
