@@ -25,6 +25,6 @@ npm install ngx-clerk
 
 ## Requirements
 
-- Angular 19 or higher
+- Angular 20 or higher
 - Clerk Core 3 (ClerkJS v6)
 - Client-side only — Server-Side Rendering (SSR) is not supported yet

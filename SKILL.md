@@ -4,8 +4,8 @@ You are migrating an Angular application from ngx-clerk v0.x (Clerk Core 2 / Cle
 
 ## Prerequisites
 
-- The target app must be on Angular 19 or higher. If it's on Angular 17 or 18, upgrade Angular first.
-- Node.js 20.9+.
+- The target app must be on Angular 20 or higher. If it's on Angular 17, 18, or 19, upgrade Angular first.
+- Node.js 20.19+.
 
 ## Step-by-step migration
 
@@ -57,7 +57,7 @@ If the app uses **NgModule bootstrap** (`AppModule`), you cannot use `provideCle
 3. Make `AppComponent` standalone with `standalone: true` and move its template dependencies to the `imports` array.
 4. Delete `AppModule`.
 
-After moving to `provideClerk()`, remove the `ClerkService` import and constructor injection from `AppComponent` -- Clerk now initializes automatically via `APP_INITIALIZER`.
+After moving to `provideClerk()`, remove the `ClerkService` import and constructor injection from `AppComponent` -- Clerk now initializes automatically at app startup.
 
 ### 3. Rename redirect props
 

@@ -171,7 +171,7 @@ export class ClerkService {
   });
 
   /**
-   * Initialize ClerkJS. Called internally by provideClerk() via APP_INITIALIZER.
+   * Initialize ClerkJS. Called internally by provideClerk() at application startup.
    * Do not call directly -- use provideClerk() in your app config.
    */
   initialize(options: ClerkInitOptions): Promise<void> {

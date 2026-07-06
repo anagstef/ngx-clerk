@@ -4,8 +4,8 @@ This guide covers all breaking changes when upgrading from ngx-clerk v0.x (Clerk
 
 ## Requirements
 
-- **Angular 19+** (v0.x supported Angular 17+)
-- **Node.js 20.9+**
+- **Angular 20+** (v0.x supported Angular 17+)
+- **Node.js 20.19+**
 
 ## 1. Update the package
 
@@ -221,7 +221,7 @@ For the full list of Clerk Core 3 changes, see the [official upgrade guide](http
 
 ## Quick migration checklist
 
-- [ ] Update to Angular 19+ and Node.js 20.9+
+- [ ] Update to Angular 20+ and Node.js 20.19+
 - [ ] Install `ngx-clerk@1`
 - [ ] Remove `@clerk/types` from your `package.json` if present
 - [ ] Replace `__init()` call with `provideClerk()` in `app.config.ts`

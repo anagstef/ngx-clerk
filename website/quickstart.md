@@ -10,7 +10,7 @@ Add authentication to a new Angular app with ngx-clerk.
 ## Before you start
 
 - [Create a Clerk application](https://dashboard.clerk.com/) in the Clerk Dashboard and copy your **Publishable Key**.
-- This guide assumes a standalone Angular 19+ app with the router.
+- This guide assumes a standalone Angular 20+ app with the router.
 
 ## Create a new Angular app
 
