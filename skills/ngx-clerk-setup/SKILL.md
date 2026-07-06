@@ -32,7 +32,7 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
     provideClerk({
-      publishableKey: '<the user's pk_test_… or pk_live_… key>',
+      publishableKey: 'YOUR_PUBLISHABLE_KEY', // pk_test_... or pk_live_... from the Clerk dashboard
       signInUrl: '/sign-in',
       signUpUrl: '/sign-up',
     }),
