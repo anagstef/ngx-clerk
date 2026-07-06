@@ -9,7 +9,7 @@ authentication, user management, and organizations.
 
 ## Prerequisites
 
-- Angular version **19 or higher**.
+- Angular version **20 or higher**.
 - Clerk Core 3 (ClerkJS v6).
 - Client-side operations only. Server-Side Rendering (SSR) is not supported at the moment.
 
