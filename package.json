@@ -7,6 +7,7 @@
     "dev": "ng build ngx-clerk && ng serve demo",
     "build": "ng build ngx-clerk && cp ./README.md ./dist/ngx-clerk/README.md",
     "watch": "ng build ngx-clerk --watch --configuration development",
+    "docs:llms": "node scripts/generate-llms.mjs",
     "lint": "ng lint",
     "test": "vitest run",
     "e2e": "playwright test",

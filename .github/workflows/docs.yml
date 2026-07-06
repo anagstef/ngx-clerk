@@ -5,10 +5,14 @@ on:
     branches: [main]
     paths:
       - 'website/**'
+      - 'MIGRATION.md'
+      - 'scripts/generate-llms.mjs'
       - '.github/workflows/docs.yml'
   pull_request:
     paths:
       - 'website/**'
+      - 'MIGRATION.md'
+      - 'scripts/generate-llms.mjs'
       - '.github/workflows/docs.yml'
   workflow_dispatch:
 
@@ -30,6 +34,10 @@ jobs:
         working-directory: website
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+      - run: node ../scripts/generate-llms.mjs
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.3'
