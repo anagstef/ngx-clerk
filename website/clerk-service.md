@@ -44,6 +44,12 @@ anywhere the service is injected.
 > from upstream SDKs' `useAuth()`, which treats `pending` as signed out by default
 > (`treatPendingAsSignedOut`). ngx-clerk has no session-task UI yet, so check
 > `session()?.status` yourself if your instance can put users into a pending state.
+> The same applies across the whole authorization surface: `has()`, the `*clerkProtect`
+> directive, the `canActivateClerk` and `canActivateProtect` guards, and `*clerkSignedIn`
+> all treat a pending session as signed in and authorized — a pending session still carries
+> `orgId` and `orgRole` claims that `has()` will evaluate. Apps that enable session tasks
+> (for example, forced organization selection) should gate on
+> `session()?.status === 'active'` themselves until ngx-clerk ships task routing.
 
 ```ts
 import { Component, inject } from '@angular/core';

@@ -232,4 +232,7 @@ See [Authentication]({% link authentication.md %}) for the full `/sso-callback` 
 - **Experimental billing buttons** (checkout, plan details, subscription details buttons) —
   only Pricing Table is wrapped.
 - **Metamask and other Web3 wallet flows** — not wrapped.
+- **Session tasks (Core 3)** — after-auth task routing (e.g. forced organization selection);
+  pending sessions are treated as signed-in across the full auth surface. See
+  [ClerkService]({% link clerk-service.md %}).
 - **Server-side rendering** — client-side rendering only. See [Home]({% link index.md %}).
