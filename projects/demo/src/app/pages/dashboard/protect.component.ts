@@ -23,7 +23,7 @@ import { ClerkProtectDirective, ClerkService } from 'ngx-clerk';
             ✓ You have the <code>org:admin</code> role in the active organization.
           </div>
           <ng-template #notAdmin>
-            <div class="text-sm text-gray-600 bg-gray-50 rounded-lg px-3 py-2">
+            <div data-testid="protect-fallback" class="text-sm text-gray-600 bg-gray-50 rounded-lg px-3 py-2">
               You need the <code>org:admin</code> role to see this content.
             </div>
           </ng-template>
@@ -33,7 +33,7 @@ import { ClerkProtectDirective, ClerkService } from 'ngx-clerk';
           <h3 class="font-semibold text-gray-900 mb-2">Imperative check</h3>
           <p class="text-sm text-gray-600">
             <code>has(&#123; permission: 'org:posts:manage' &#125;)</code> →
-            <span class="font-mono font-medium">{{ clerk.has({ permission: 'org:posts:manage' }) }}</span>
+            <span data-testid="protect-permission-value" class="font-mono font-medium">{{ clerk.has({ permission: 'org:posts:manage' }) }}</span>
           </p>
         </div>
       </div>

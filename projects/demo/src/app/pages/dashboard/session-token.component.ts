@@ -40,7 +40,7 @@ import { ClerkService } from 'ngx-clerk';
         </button>
 
         @if (token(); as value) {
-          <pre class="p-3 rounded-lg bg-gray-900 text-green-300 text-xs overflow-x-auto whitespace-pre-wrap break-all">{{ value }}</pre>
+          <pre data-testid="session-token-value" class="p-3 rounded-lg bg-gray-900 text-green-300 text-xs overflow-x-auto whitespace-pre-wrap break-all">{{ value }}</pre>
         }
       </div>
     </div>
