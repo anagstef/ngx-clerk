@@ -10,7 +10,7 @@ module.exports = {
       changelogFile: 'CHANGELOG.md',
     }],
     ['@semantic-release/exec', {
-      prepareCmd: 'npm version ${nextRelease.version} --no-git-tag-version --prefix projects/ngx-clerk && node scripts/sync-sdk-version.mjs && pnpm build',
+      prepareCmd: 'npm version ${nextRelease.version} --no-git-tag-version --allow-same-version --prefix projects/ngx-clerk && node scripts/sync-sdk-version.mjs && pnpm build',
     }],
     ['@semantic-release/npm', {
       pkgRoot: 'dist/ngx-clerk',

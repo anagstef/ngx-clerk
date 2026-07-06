@@ -35,7 +35,10 @@ describe('ClerkService', () => {
 
   async function initService(): Promise<ClerkService> {
     const service = TestBed.inject(ClerkService);
-    await service.initialize({ publishableKey: 'pk_test_x' });
+    await service.initialize({
+      publishableKey: 'pk_test_x',
+      sdkMetadata: { name: 'ngx-clerk', version: '1.0.0', environment: 'browser' },
+    });
     return service;
   }
 
@@ -50,7 +53,9 @@ describe('ClerkService', () => {
   it('loads ClerkJS and reflects the signed-out state', async () => {
     const service = await initService();
 
-    expect(instance['load']).toHaveBeenCalled();
+    expect(instance['load']).toHaveBeenCalledWith(
+      expect.objectContaining({ sdkMetadata: expect.objectContaining({ name: 'ngx-clerk' }) }),
+    );
     expect(service.isLoaded()).toBe(true);
     expect(service.isSignedIn()).toBe(false);
     expect(service.user()).toBeNull();

@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { deriveState } from '@clerk/shared/deriveState';
 import { createCheckAuthorization } from '@clerk/shared/authorization';
 import type {
-  ActiveSessionResource,
   CheckAuthorizationWithCustomPermissions,
   Clerk,
   ClerkOptions,
@@ -18,6 +17,7 @@ import type {
   OrganizationResource,
   SessionResource,
   SetActiveParams,
+  SignedInSessionResource,
   SignInProps,
   SignInRedirectOptions,
   SignInResource,
@@ -82,7 +82,7 @@ export class ClerkService {
   // Core state signals (private writable, public readonly)
   private readonly _clerk = signal<HeadlessBrowserClerk | BrowserClerk | null>(null);
   private readonly _client = signal<ClientResource | null>(null);
-  private readonly _session = signal<ActiveSessionResource | null>(null);
+  private readonly _session = signal<SignedInSessionResource | null>(null);
   private readonly _user = signal<UserResource | null>(null);
   private readonly _organization = signal<OrganizationResource | null>(null);
 
@@ -187,7 +187,7 @@ export class ClerkService {
     const { clerkPromise, clerkUICtorPromise } = loadClerkScripts(options);
 
     return clerkPromise.then(async () => {
-      const { publishableKey, __internal_clerkJSUrl, __internal_clerkJSVersion, sdkMetadata, ...loadOptions } = options;
+      const { publishableKey, __internal_clerkJSUrl, __internal_clerkJSVersion, ...loadOptions } = options;
       await window.Clerk.load({
         routerPush: (to: string) =>
           this._ngZone.run(() => {
@@ -209,7 +209,7 @@ export class ClerkService {
 
       this._ngZone.run(() => {
         this._client.set(window.Clerk.client ?? null);
-        this._session.set((window.Clerk.session as ActiveSessionResource) ?? null);
+        this._session.set((window.Clerk.session as SignedInSessionResource) ?? null);
         this._user.set(window.Clerk.user ?? null);
         this._organization.set(window.Clerk.organization ?? null);
         this._clerk.set(window.Clerk);
@@ -218,7 +218,7 @@ export class ClerkService {
       window.Clerk.addListener((resources) => {
         this._ngZone.run(() => {
           this._client.set(resources.client ?? null);
-          this._session.set((resources.session as ActiveSessionResource) ?? null);
+          this._session.set((resources.session as SignedInSessionResource) ?? null);
           this._user.set(resources.user ?? null);
           this._organization.set(resources.organization ?? null);
           this._clerk.set(window.Clerk);

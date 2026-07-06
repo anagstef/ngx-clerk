@@ -98,7 +98,7 @@ scripts/compat-smoke.sh 22
 
 Packs the built library and installs it into a fresh app on a newer Angular major, to catch
 forward-compatibility breaks early. CI runs this same script against Angular 21 and 22 on
-every push and pull request.
+pull requests and pushes to main.
 
 ## Release process
 

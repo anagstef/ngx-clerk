@@ -21,7 +21,7 @@ anywhere the service is injected.
 | --- | --- | --- |
 | `clerk()` | `Clerk` or `null` | the Clerk instance, or `null` until Clerk has loaded |
 | `client()` | `ClientResource` or `null` | the current Clerk client resource |
-| `session()` | `ActiveSessionResource` or `null` | the active session, or `null` when not signed in |
+| `session()` | `SignedInSessionResource` or `null` | the active session, or `null` when not signed in |
 | `user()` | `UserResource` or `null` | the current user, or `null` when not signed in |
 | `organization()` | `OrganizationResource` or `null` | the active organization, or `null` when none is active |
 | `isLoaded()` | `boolean` | whether Clerk has finished loading |
