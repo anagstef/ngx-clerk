@@ -1,3 +1,8 @@
+---
+name: ngx-clerk-migrate-v0-v1
+description: Migrate an Angular application from ngx-clerk v0.x (Clerk Core 2, RxJS observables) to v1 (Clerk Core 3, signals, provideClerk) — dependency updates, API renames, and verification.
+---
+
 # ngx-clerk v0.x to v1.0 Migration Skill
 
 You are migrating an Angular application from ngx-clerk v0.x (Clerk Core 2 / ClerkJS v5) to ngx-clerk v1.0 (Clerk Core 3 / ClerkJS v6).
@@ -203,3 +208,7 @@ After all changes:
 - **Not converting to standalone bootstrap** -- `provideClerk()` returns `EnvironmentProviders` which requires `bootstrapApplication()`, not `NgModule`.
 - **Using `afterSignInUrl`** -- renamed to `signInFallbackRedirectUrl` in Core 3.
 - **Importing from `@clerk/types`** -- package no longer exists, use `ngx-clerk` or `@clerk/shared/types`.
+
+## Full documentation
+
+https://anagstef.github.io/ngx-clerk/llms-full.txt
