@@ -84,7 +84,7 @@ export class AppComponent {
 | Method | Description |
 | --- | --- |
 | `has(params: CheckAuthorizationParams): boolean` | Checks a role, permission, feature, or plan. `false` while signed out. See [Organizations & roles]({% link organizations.md %}). |
-| `getToken(options?: GetTokenOptions)` | Returns the current session JWT, optionally for a named template. Resolves to `null` when there's no active session. |
+| `getToken(options?: GetTokenOptions): Promise<string \| null>` | Returns the current session JWT, optionally for a named template. Resolves to `null` when there's no active session. |
 | `setActive(params: SetActiveParams): Promise<void>` | Sets the active session and/or organization. |
 | `handleRedirectCallback(params?: HandleOAuthCallbackParams): Promise<void>` | Completes an OAuth/SSO redirect flow. |
 

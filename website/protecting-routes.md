@@ -52,6 +52,8 @@ export const routes: Routes = [
 ];
 ```
 
+See also [Organizations & roles]({% link organizations.md %}) for where roles and permissions come from.
+
 ## Gate UI with `*clerkProtect`
 
 Protect part of a template by role, permission, feature, or plan. An optional `else` template renders when the user is unauthorized:

@@ -27,6 +27,9 @@ npm install ngx-clerk
 - [Protecting routes]({% link protecting-routes.md %}) — guards and the `*clerkProtect` directive
 - [Reading auth state]({% link reading-auth-state.md %}) — the `ClerkService` signals
 - [Session tokens]({% link session-tokens.md %}) — call your backend with `getToken()`
+- [Organizations & roles]({% link organizations.md %}) — org components, roles, permissions, features, and plans
+- [Components]({% link components.md %}) — all 13 prebuilt Clerk UI components
+- [ClerkService]({% link clerk-service.md %}) — every signal and method, with `effect()` examples
 
 ## Requirements
 
