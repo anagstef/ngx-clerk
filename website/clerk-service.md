@@ -38,6 +38,13 @@ anywhere the service is injected.
 | `sessions()` | `SessionResource[]` | every session registered on the current client device |
 | `membership()` | `OrganizationMembershipResource` or `null` | the current user's membership in the active organization |
 
+> `isSignedIn()` is `!!user()?.id` — it does not check session status. A Clerk Core 3 session
+> with status `pending` (for example, an incomplete organization-selection task) still reports
+> `isSignedIn() === true`, since the pending session already carries a full `user`. This differs
+> from upstream SDKs' `useAuth()`, which treats `pending` as signed out by default
+> (`treatPendingAsSignedOut`). ngx-clerk has no session-task UI yet, so check
+> `session()?.status` yourself if your instance can put users into a pending state.
+
 ```ts
 import { Component, inject } from '@angular/core';
 import { ClerkService } from 'ngx-clerk';
