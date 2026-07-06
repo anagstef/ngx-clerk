@@ -1,6 +1,7 @@
 ---
 title: Session tokens
 nav_order: 6
+description: How to retrieve session JWTs with getToken() and attach them to backend requests.
 ---
 
 # Session tokens

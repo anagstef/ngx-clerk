@@ -1,6 +1,7 @@
 ---
 title: Reading auth state
 nav_order: 5
+description: How to read Clerk's reactive state — user, session, and organization — from Angular signals via ClerkService.
 ---
 
 # Reading auth state

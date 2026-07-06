@@ -1,6 +1,7 @@
 ---
 title: Quickstart
 nav_order: 2
+description: Step-by-step guide to adding Clerk authentication to a new Angular 20+ app with ngx-clerk.
 ---
 
 # Quickstart

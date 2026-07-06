@@ -1,6 +1,7 @@
 ---
 title: Protecting routes
 nav_order: 4
+description: How to restrict routes and template sections by authentication state, role, or permission.
 ---
 
 # Protecting routes
@@ -39,6 +40,7 @@ function canActivateProtect(
 `params` is the same `{ role | permission | feature | plan }` shape accepted by `has()` and `*clerkProtect`. `options.unauthorizedUrl` is where a signed-in-but-unauthorized user is redirected; omit it and they're simply blocked (the guard returns `false`). Unauthenticated users are always redirected to sign-in first:
 
 ```ts
+import { Routes } from '@angular/router';
 import { canActivateProtect } from 'ngx-clerk';
 
 export const routes: Routes = [

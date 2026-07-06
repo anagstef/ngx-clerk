@@ -1,6 +1,7 @@
 ---
 title: Authentication
 nav_order: 3
+description: How to add sign-in/sign-up pages, auth buttons, control-flow directives, and an SSO callback route.
 ---
 
 # Authentication
@@ -41,7 +42,7 @@ export const routes: Routes = [
 
 The sign-up page follows the same pattern with `<clerk-sign-up [props]="{ routing: 'path', path: '/sign-up', signInUrl: '/sign-in' }" />`.
 
-Prop changes re-mount the underlying Clerk component, so keep the `[props]` object reference stable (e.g. a class field) rather than creating a new object literal on every change-detection cycle.
+When `[props]` genuinely changes, the component re-mounts with the new configuration; inline object literals that are structurally equal are detected and do not cause re-mounts, so it's safe to bind a literal in the template.
 
 ## Auth buttons
 
@@ -139,8 +140,14 @@ export class SsoCallbackComponent {}
 
 ```ts
 // src/app/app.routes.ts
-{
-  path: 'sso-callback',
-  loadComponent: () => import('./sso-callback.component').then((m) => m.SsoCallbackComponent),
-},
+import { Routes } from '@angular/router';
+import { catchAllRoute } from 'ngx-clerk';
+
+export const routes: Routes = [
+  // … existing routes …
+  {
+    path: 'sso-callback',
+    loadComponent: () => import('./sso-callback.component').then((m) => m.SsoCallbackComponent),
+  },
+];
 ```

@@ -1,6 +1,7 @@
 ---
 title: Home
 nav_order: 1
+description: Overview of ngx-clerk — the unofficial Angular SDK for Clerk authentication, covering features, installation, and requirements.
 ---
 
 # ngx-clerk
