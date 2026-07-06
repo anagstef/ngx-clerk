@@ -78,7 +78,7 @@ readonly isBillingAdmin = (has: CheckAuthorizationWithCustomPermissions) =>
   has({ role: 'org:admin' }) || has({ permission: 'org:billing:manage' });
 ```
 
-Both guards and `*clerkProtect` evaluate their conditions against the active organization. See [Reading auth state]({% link reading-auth-state.md %}) for the `organization()`, `orgRole()`, and `membership()` signals backing them.
+`canActivateProtect` and `*clerkProtect` evaluate `role` and `permission` conditions against the active organization (`feature` and `plan` conditions can be organization- or user-scoped). See [Reading auth state]({% link reading-auth-state.md %}) for the `organization()`, `orgRole()`, and `membership()` signals backing them.
 
 ## Check authorization imperatively
 

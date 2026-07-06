@@ -59,6 +59,8 @@ export const clerkAuthInterceptor: HttpInterceptorFn = (req, next) => {
 };
 ```
 
+If `getToken()` rejects — for example with `ClerkOfflineError` while the client is offline — the failure propagates into the request's error path, so subscribers see it like any other failed request. That's usually what you want; add a `catchError` to the pipe if you'd rather fall back to a different behavior.
+
 Register it in your app config:
 
 ```ts

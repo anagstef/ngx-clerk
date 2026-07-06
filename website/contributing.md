@@ -52,7 +52,7 @@ pnpm lint
 Add a Clerk Secret Key from the shared dev instance to `e2e/.env` (gitignored, never
 committed):
 
-```
+```text
 CLERK_SECRET_KEY=sk_test_XXXX
 ```
 

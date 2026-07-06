@@ -78,7 +78,7 @@ See [Authentication]({% link authentication.md %}) for examples combining them w
 
 ## Using an Observable
 
-Everything on `ClerkService` is a signal. If you need an `Observable` — to combine auth state with `HttpClient` streams, for example — convert it with `toObservable()` from `@angular/core/rxjs-interop`:
+All reactive state on `ClerkService` is exposed as signals (methods like `has()` or `signOut()` are plain calls). If you need an `Observable` — to combine auth state with `HttpClient` streams, for example — convert any state signal with `toObservable()` from `@angular/core/rxjs-interop`:
 
 ```ts
 import { inject } from '@angular/core';

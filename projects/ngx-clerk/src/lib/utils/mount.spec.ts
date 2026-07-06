@@ -14,6 +14,16 @@ describe('clerkPropsEqual', () => {
     expect(clerkPropsEqual({ fn: () => 1 }, { fn: () => 2 })).toBe(true);
   });
 
+  it('ignores object key order', () => {
+    expect(clerkPropsEqual({ a: 1, b: 'x' }, { b: 'x', a: 1 })).toBe(true);
+  });
+
+  it('ignores key order in nested objects', () => {
+    expect(
+      clerkPropsEqual({ appearance: { variables: { colorPrimary: '#000' }, cssLayerName: 'clerk' } }, { appearance: { cssLayerName: 'clerk', variables: { colorPrimary: '#000' } } }),
+    ).toBe(true);
+  });
+
   it('treats undefined as equal to undefined', () => {
     expect(clerkPropsEqual(undefined, undefined)).toBe(true);
   });

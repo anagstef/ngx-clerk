@@ -72,7 +72,17 @@ export function clerkPropsEqual<T>(a: T, b: T): boolean {
 
 function stableStringify(value: unknown): string {
   try {
-    return JSON.stringify(value, (_key, val) => (typeof val === 'function' ? '__fn__' : val)) ?? 'undefined';
+    return (
+      JSON.stringify(value, (_key, val: unknown) => {
+        if (typeof val === 'function') {
+          return '__fn__';
+        }
+        if (val && typeof val === 'object' && !Array.isArray(val)) {
+          return Object.fromEntries(Object.entries(val).sort(([a], [b]) => a.localeCompare(b)));
+        }
+        return val;
+      }) ?? 'undefined'
+    );
   } catch {
     return '__unserializable__';
   }
