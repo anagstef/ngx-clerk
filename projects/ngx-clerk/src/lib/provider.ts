@@ -1,8 +1,9 @@
 import {
-  APP_INITIALIZER,
   EnvironmentProviders,
+  inject,
   InjectionToken,
   makeEnvironmentProviders,
+  provideAppInitializer,
 } from '@angular/core';
 import type { ClerkInitOptions } from './utils/types';
 import { ClerkService } from './services/clerk.service';
@@ -15,14 +16,6 @@ const NGX_CLERK_SDK_METADATA = {
   version: '1.0.0',
   environment: 'browser',
 };
-
-function initializeClerk(clerkService: ClerkService, options: ClerkInitOptions): () => Promise<void> {
-  return () =>
-    clerkService.initialize({
-      ...options,
-      sdkMetadata: options.sdkMetadata ?? NGX_CLERK_SDK_METADATA,
-    });
-}
 
 /**
  * Provides Clerk authentication services to an Angular application.
@@ -40,11 +33,11 @@ function initializeClerk(clerkService: ClerkService, options: ClerkInitOptions):
 export function provideClerk(options: ClerkInitOptions): EnvironmentProviders {
   return makeEnvironmentProviders([
     { provide: CLERK_OPTIONS, useValue: options },
-    {
-      provide: APP_INITIALIZER,
-      useFactory: (clerkService: ClerkService) => initializeClerk(clerkService, options),
-      deps: [ClerkService],
-      multi: true,
-    },
+    provideAppInitializer(() =>
+      inject(ClerkService).initialize({
+        ...options,
+        sdkMetadata: options.sdkMetadata ?? NGX_CLERK_SDK_METADATA,
+      }),
+    ),
   ]);
 }

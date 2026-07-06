@@ -21,7 +21,7 @@ describe('provideClerk', () => {
     });
 
     const initializers = TestBed.inject(APP_INITIALIZER);
-    initializers.forEach((init) => init());
+    TestBed.runInInjectionContext(() => initializers.forEach((init) => init()));
 
     expect(initSpy).toHaveBeenCalledWith(
       expect.objectContaining({
